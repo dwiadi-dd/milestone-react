@@ -14,7 +14,6 @@ import * as Yup from "yup";
 function App() {
   const [step, setStep] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [valid, setValid] = useState("");
 
   const [registerData, setRegisterData] = useState<RegsiterDataType>({
     fullname: "",
@@ -31,6 +30,7 @@ function App() {
   const isLastStep = step === stepList.length - 1;
 
   const next = () => {
+    console.log("next");
     setStep((i) => {
       if (i >= stepList.length - 1) return i;
       return i + 1;
@@ -38,18 +38,15 @@ function App() {
   };
 
   const back = () => {
+    console.log("back");
+
     setStep((i) => {
       if (i <= 0) return i;
       return i - 1;
     });
   };
 
-  // const onSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (!isLastStep) return next();
-  //   if (isLastStep && valid.length >= 1) return;
-  //   setIsSuccess(true);
-  // };
+  const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
   const formik = useFormik({
     initialValues: {
@@ -61,6 +58,7 @@ function App() {
       province: "banten",
       username: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: Yup.object({
       fullname: Yup.string()
@@ -73,20 +71,24 @@ function App() {
       street: Yup.string().required("Street is required"),
       city: Yup.string().required("City is required"),
       province: Yup.string().required("Province is required"),
-      username: Yup.string().required("Username is required"),
+      username: Yup.string()
+        .required("Username is required")
+        .max(24, "Us can be maximum 24 characters"),
       password: Yup.string()
         .required("Password is required")
-        .min(8, "password must be at least 8 characters")
         .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/,
-          "password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
-        ),
+          passwordRules,
+          "password must contain at least min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit."
+        )
+        .max(24, "Password can be maximum 24 characters"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), ""], "Passwords must match")
+        .required("Required"),
     }),
 
     onSubmit: (values) => {
       if (!isLastStep) return next();
       setRegisterData(values);
-      alert(JSON.stringify(registerData, null, 2));
       setIsSuccess(true);
     },
   });
@@ -119,7 +121,7 @@ function App() {
             <h1 className="form-title ">{stepList[step].title}</h1>
             <h3 className="form-desc">{stepList[step].desc}</h3>
             <form
-              className="form-registration mt-10 grid gap-8"
+              className="form-registration mt-10 grid gap-1"
               onSubmit={formik.handleSubmit}
             >
               {step === 0 ? (
@@ -138,8 +140,12 @@ function App() {
                       onBlur={formik.handleBlur}
                     />
                     {formik.touched.fullname && formik.errors.fullname ? (
-                      <div>{formik.errors.fullname}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.fullname}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="label-input">
@@ -155,8 +161,12 @@ function App() {
                       onBlur={formik.handleBlur}
                     />
                     {formik.touched.email && formik.errors.email ? (
-                      <div>{formik.errors.email}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.email}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <label htmlFor="dob" className="label-input">
@@ -173,8 +183,12 @@ function App() {
                       max="2006-01-01"
                     />
                     {formik.touched.dob && formik.errors.dob ? (
-                      <div>{formik.errors.dob}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.dob}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                     <p className="text-red-400">{"\u00A0"}</p>
                   </div>
                 </>
@@ -194,8 +208,12 @@ function App() {
                       onBlur={formik.handleBlur}
                     />
                     {formik.touched.street && formik.errors.street ? (
-                      <div>{formik.errors.street}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.street}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <label htmlFor="province" className="label-input">
@@ -217,8 +235,12 @@ function App() {
                       ))}
                     </select>
                     {formik.touched.province && formik.errors.province ? (
-                      <div>{formik.errors.province}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.province}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <label htmlFor="city" className="label-input">
@@ -239,8 +261,12 @@ function App() {
                     </select>
                     <p className="text-red-400">{"\u00A0"}</p>
                     {formik.touched.city && formik.errors.city ? (
-                      <div>{formik.errors.city}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.city}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                 </>
               ) : step === 2 ? (
@@ -259,8 +285,12 @@ function App() {
                       onBlur={formik.handleBlur}
                     />
                     {formik.touched.username && formik.errors.username ? (
-                      <div>{formik.errors.username}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.username}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <label htmlFor="password" className="label-input">
@@ -275,31 +305,38 @@ function App() {
                       onBlur={formik.handleBlur}
                     />
                     {formik.touched.password && formik.errors.password ? (
-                      <div>{formik.errors.password}</div>
-                    ) : null}
+                      <div className="font-light text-red-600">
+                        {formik.errors.password}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                   <div className="form-group">
-                    <label htmlFor="reenter" className="label-input">
-                      reenter password
+                    <label htmlFor="confirmPassword" className="label-input">
+                      Confirm Password
                     </label>
                     <input
                       className="input-form"
                       type="password"
-                      id="reenter"
-                      name="reenter"
-                      onBlur={(e) => {
-                        e.target.value !== registerData.password
-                          ? setValid("pass not valid")
-                          : setValid("");
-                      }}
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      value={formik.values.confirmPassword}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
-                    <p className="text-red-400">
-                      {valid.length >= 1 ? valid : "\u00A0"}
-                    </p>
+                    {formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword ? (
+                      <div className="font-light text-red-600">
+                        {formik.errors.confirmPassword}
+                      </div>
+                    ) : (
+                      <div>{"\u00A0"}</div>
+                    )}
                   </div>
                 </>
               ) : (
-                <p>-</p>
+                <div>{"\u00A0"}</div>
               )}
               <div className="button-form-group ">
                 <button
@@ -310,10 +347,15 @@ function App() {
                 >
                   back
                 </button>
-
-                <button className="next-button" type="submit">
-                  {isLastStep ? "Finish" : "Next"}
-                </button>
+                {isLastStep ? (
+                  <button className="next-button" type="submit">
+                    Finish
+                  </button>
+                ) : (
+                  <button className="next-button" type="button" onClick={next}>
+                    Next
+                  </button>
+                )}
               </div>
             </form>
           </div>
