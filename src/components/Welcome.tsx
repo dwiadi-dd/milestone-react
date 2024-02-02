@@ -8,7 +8,7 @@ export default function Welcome({ registerData }: RegsiterDataTypeObject) {
   return (
     <div className=" flex flex-col mx-auto">
       <h1 className="text-center text-4xl font-semibold tracking-widest">
-        Welcome to Kotlek {username}!
+        Welcome {username}!
       </h1>
       <img
         src={avatar}

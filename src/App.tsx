@@ -8,11 +8,14 @@ import {
 } from "./utils";
 import Welcome from "./components/Welcome";
 import Stepper from "./components/Stepper";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function App() {
   const [step, setStep] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
   const [valid, setValid] = useState("");
+
   const [registerData, setRegisterData] = useState<RegsiterDataType>({
     fullname: "",
     email: "",
@@ -41,12 +44,53 @@ function App() {
     });
   };
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isLastStep) return next();
-    if (isLastStep && valid.length >= 1) return;
-    setIsSuccess(true);
-  };
+  // const onSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!isLastStep) return next();
+  //   if (isLastStep && valid.length >= 1) return;
+  //   setIsSuccess(true);
+  // };
+
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      email: "",
+      dob: "2004-01-01",
+      street: "",
+      city: "",
+      province: "banten",
+      username: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      fullname: Yup.string()
+        .required("Fullname is required")
+        .min(4, "Fullname must be at least 4 characters"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      dob: Yup.date().required("Date of birth is required"),
+      street: Yup.string().required("Street is required"),
+      city: Yup.string().required("City is required"),
+      province: Yup.string().required("Province is required"),
+      username: Yup.string().required("Username is required"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(8, "password must be at least 8 characters")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/,
+          "password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+        ),
+    }),
+
+    onSubmit: (values) => {
+      if (!isLastStep) return next();
+      setRegisterData(values);
+      alert(JSON.stringify(registerData, null, 2));
+      setIsSuccess(true);
+    },
+  });
+
   return (
     <div className="min-h-screen bg-white flex flex-col lg:flex-row">
       <div className="bg-slate-700 w-full lg:w-1/3 text-white shadow-2xl flex flex-col">
@@ -76,7 +120,7 @@ function App() {
             <h3 className="form-desc">{stepList[step].desc}</h3>
             <form
               className="form-registration mt-10 grid gap-8"
-              onSubmit={onSubmit}
+              onSubmit={formik.handleSubmit}
             >
               {step === 0 ? (
                 <>
@@ -89,17 +133,13 @@ function App() {
                       type="text"
                       id="fullanme"
                       name="fullname"
-                      value={registerData.fullname as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          fullname: e.target.value,
-                        }))
-                      }
-                      pattern=".{5,}"
-                      title="Name Must be 4 Characters or longer"
-                      required
+                      value={formik.values.fullname}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
+                    {formik.touched.fullname && formik.errors.fullname ? (
+                      <div>{formik.errors.fullname}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="label-input">
@@ -110,16 +150,13 @@ function App() {
                       type="email"
                       id="email"
                       name="email"
-                      value={registerData.email as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          email: e.target.value,
-                        }))
-                      }
-                      title="please provide valid email adress"
-                      required
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
+                    {formik.touched.email && formik.errors.email ? (
+                      <div>{formik.errors.email}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="dob" className="label-input">
@@ -130,16 +167,14 @@ function App() {
                       type="date"
                       id="dob"
                       name="dob"
-                      value={registerData.dob as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          dob: e.target.value,
-                        }))
-                      }
+                      value={formik.values.dob}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       max="2006-01-01"
-                      required
                     />
+                    {formik.touched.dob && formik.errors.dob ? (
+                      <div>{formik.errors.dob}</div>
+                    ) : null}
                     <p className="text-red-400">{"\u00A0"}</p>
                   </div>
                 </>
@@ -154,17 +189,13 @@ function App() {
                       type="text"
                       id="street"
                       name="street"
-                      value={registerData.street as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          street: e.target.value,
-                        }))
-                      }
-                      pattern=".{10,}"
-                      title="address street Must be 10 Characters or longer"
-                      required
+                      value={formik.values.street}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
+                    {formik.touched.street && formik.errors.street ? (
+                      <div>{formik.errors.street}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="province" className="label-input">
@@ -174,19 +205,9 @@ function App() {
                       className="input-form"
                       id="province"
                       name="province"
-                      value={registerData.province as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          province: e.target.value,
-                        }))
-                      }
-                      onBlur={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          province: e.target.value,
-                        }))
-                      }
+                      value={formik.values.province}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       required
                     >
                       {ListOfProvinsi.map((option, index) => (
@@ -195,6 +216,9 @@ function App() {
                         </option>
                       ))}
                     </select>
+                    {formik.touched.province && formik.errors.province ? (
+                      <div>{formik.errors.province}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="city" className="label-input">
@@ -204,26 +228,19 @@ function App() {
                       className="input-form"
                       id="city"
                       name="city"
-                      value={registerData.city as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          city: e.target.value,
-                        }))
-                      }
-                      onBlur={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          city: e.target.value,
-                        }))
-                      }
+                      value={formik.values.city}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       required
                     >
-                      {ListOfCity[registerData.province]?.map((option) => (
+                      {ListOfCity[formik.values.province]?.map((option) => (
                         <option value={option.kota}>{option.kota}</option>
                       ))}
                     </select>
                     <p className="text-red-400">{"\u00A0"}</p>
+                    {formik.touched.city && formik.errors.city ? (
+                      <div>{formik.errors.city}</div>
+                    ) : null}
                   </div>
                 </>
               ) : step === 2 ? (
@@ -237,17 +254,13 @@ function App() {
                       type="text"
                       id="username"
                       name="username"
-                      value={registerData.username as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          username: e.target.value,
-                        }))
-                      }
-                      pattern=".{6,}"
-                      title="username Must be 10 Characters or longer"
-                      required
+                      value={formik.values.username}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
+                    {formik.touched.username && formik.errors.username ? (
+                      <div>{formik.errors.username}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="password" className="label-input">
@@ -257,17 +270,13 @@ function App() {
                       className="input-form"
                       type="password"
                       id="password"
-                      value={registerData.password as string}
-                      onChange={(e) =>
-                        setRegisterData((prev) => ({
-                          ...prev,
-                          password: e.target.value,
-                        }))
-                      }
-                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                      title="Must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:"
-                      required
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
+                    {formik.touched.password && formik.errors.password ? (
+                      <div>{formik.errors.password}</div>
+                    ) : null}
                   </div>
                   <div className="form-group">
                     <label htmlFor="reenter" className="label-input">
@@ -302,7 +311,7 @@ function App() {
                   back
                 </button>
 
-                <button className="next-button">
+                <button className="next-button" type="submit">
                   {isLastStep ? "Finish" : "Next"}
                 </button>
               </div>
