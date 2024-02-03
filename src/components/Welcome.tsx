@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/avatar.png";
 import UserDataContext from "../context/UserDataContext";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [userData] = useContext(UserDataContext);
   const removeData = () => {
     localStorage.removeItem("userdata");
@@ -59,10 +62,10 @@ export default function Welcome() {
         </>
       ) : (
         <div className="flex flex-col mx-auto justify-items-center ">
-          <h1>
-            you dont have account yet please register{" "}
+          <h1 className="text-xl font-light">
+            {t(`register`)}{" "}
             <Link to={"/"} className="font-semibold hover:opacity-40">
-              click here to register
+              {t(`registerLink`)}
             </Link>
           </h1>
         </div>

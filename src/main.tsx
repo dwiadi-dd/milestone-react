@@ -6,15 +6,26 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Welcome from "./components/Welcome.tsx";
 import UserDataContext from "./context/UserDataContext";
 import { RegsiterDataContextType } from "./utils.ts";
+import "./locales/locales.ts";
+import { useTranslation } from "react-i18next";
 
 const Main = () => {
+  const { i18n } = useTranslation();
   const userData = useState(
     localStorage.getItem("userdata")
       ? JSON.parse(localStorage.getItem("userdata") as string)
       : (null as RegsiterDataContextType | null)
   );
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <React.StrictMode>
+      <select onChange={(e) => changeLanguage(e.target.value)}>
+        <option value="en">English</option>
+        <option value="id">Indonesia</option>
+      </select>
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
           <Routes>
