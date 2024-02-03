@@ -16,18 +16,7 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [, setUserData] = useContext(UserDataContext);
-  const [registerData, setRegisterData] = useState<RegsiterDataType>({
-    fullname: "",
-    email: "",
-    dob: "2004-01-01",
-    street: "",
-    city: "",
-    province: "banten",
-    username: "",
-    password: "",
-  });
 
   const isFirstStep = step === 0;
   const isLastStep = step === stepList.length - 1;
@@ -92,6 +81,7 @@ function App() {
     onSubmit: (values) => {
       if (!isLastStep) return next();
       setUserData(values);
+      localStorage.setItem("userdata", JSON.stringify(values));
       navigate("/user");
     },
   });
@@ -106,263 +96,252 @@ function App() {
             className="lg:w-[200px] w-[10em] pt-4 pl-4"
           />
         </header>
-        {isSuccess ? (
-          <p className="mx-auto stepper-desc text-2xl font-semibold lg:pt-48 pt-8 h-[4em]">
-            Registration Complete
-          </p>
-        ) : (
-          <Stepper step={step} stepList={stepList} />
-        )}
+
+        <Stepper step={step} stepList={stepList} />
       </div>
       <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
-        {isSuccess ? (
-          <>
-            <Welcome />
-          </>
-        ) : (
-          <div className="step-form">
-            <h1 className="form-title ">{stepList[step].title}</h1>
-            <h3 className="form-desc">{stepList[step].desc}</h3>
-            <form
-              className="form-registration mt-10 grid gap-1"
-              onSubmit={formik.handleSubmit}
-            >
-              {step === 0 ? (
-                <>
-                  <div className="form-group ">
-                    <label htmlFor="fullname" className="label-input">
-                      Full Name
-                    </label>
-                    <input
-                      className="input-form"
-                      type="text"
-                      id="fullanme"
-                      name="fullname"
-                      value={formik.values.fullname}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.fullname && formik.errors.fullname ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.fullname}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email" className="label-input">
-                      Email
-                    </label>
-                    <input
-                      className="input-form"
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.email}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="dob" className="label-input">
-                      Date of Birth
-                    </label>
-                    <input
-                      className="input-form"
-                      type="date"
-                      id="dob"
-                      name="dob"
-                      value={formik.values.dob}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      max="2006-01-01"
-                    />
-                    {formik.touched.dob && formik.errors.dob ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.dob}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                    <p className="text-red-400">{"\u00A0"}</p>
-                  </div>
-                </>
-              ) : step === 1 ? (
-                <>
-                  <div className="form-group ">
-                    <label htmlFor="street" className="label-input">
-                      street address
-                    </label>
-                    <input
-                      className="input-form"
-                      type="text"
-                      id="street"
-                      name="street"
-                      value={formik.values.street}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.street && formik.errors.street ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.street}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="province" className="label-input">
-                      province
-                    </label>
-                    <select
-                      className="input-form"
-                      id="province"
-                      name="province"
-                      value={formik.values.province}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      required
-                    >
-                      {ListOfProvinsi.map((option, index) => (
-                        <option key={index} value={option.value}>
-                          {option.provinsi}
-                        </option>
-                      ))}
-                    </select>
-                    {formik.touched.province && formik.errors.province ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.province}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="city" className="label-input">
-                      City
-                    </label>
-                    <select
-                      className="input-form"
-                      id="city"
-                      name="city"
-                      value={formik.values.city}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      required
-                    >
-                      {ListOfCity[formik.values.province]?.map((option) => (
-                        <option value={option.kota}>{option.kota}</option>
-                      ))}
-                    </select>
-                    <p className="text-red-400">{"\u00A0"}</p>
-                    {formik.touched.city && formik.errors.city ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.city}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                </>
-              ) : step === 2 ? (
-                <>
-                  <div className="form-group ">
-                    <label htmlFor="username" className="label-input">
-                      username
-                    </label>
-                    <input
-                      className="input-form"
-                      type="text"
-                      id="username"
-                      name="username"
-                      value={formik.values.username}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.username && formik.errors.username ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.username}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password" className="label-input">
-                      password
-                    </label>
-                    <input
-                      className="input-form"
-                      type="password"
-                      id="password"
-                      value={formik.values.password}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.password && formik.errors.password ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.password}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="confirmPassword" className="label-input">
-                      Confirm Password
-                    </label>
-                    <input
-                      className="input-form"
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      value={formik.values.confirmPassword}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                    {formik.touched.confirmPassword &&
-                    formik.errors.confirmPassword ? (
-                      <div className="font-light text-red-600">
-                        {formik.errors.confirmPassword}
-                      </div>
-                    ) : (
-                      <div>{"\u00A0"}</div>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <div>{"\u00A0"}</div>
-              )}
-              <div className="button-form-group ">
-                <button
-                  className="back-button"
-                  onClick={back}
-                  type="button"
-                  disabled={isFirstStep}
-                >
-                  back
+        <div className="step-form">
+          <h1 className="form-title ">{stepList[step].title}</h1>
+          <h3 className="form-desc">{stepList[step].desc}</h3>
+          <form
+            className="form-registration mt-10 grid gap-1"
+            onSubmit={formik.handleSubmit}
+          >
+            {step === 0 ? (
+              <>
+                <div className="form-group ">
+                  <label htmlFor="fullname" className="label-input">
+                    Full Name
+                  </label>
+                  <input
+                    className="input-form"
+                    type="text"
+                    id="fullanme"
+                    name="fullname"
+                    value={formik.values.fullname}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.fullname && formik.errors.fullname ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.fullname}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email" className="label-input">
+                    Email
+                  </label>
+                  <input
+                    className="input-form"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.email}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="dob" className="label-input">
+                    Date of Birth
+                  </label>
+                  <input
+                    className="input-form"
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    value={formik.values.dob}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    max="2006-01-01"
+                  />
+                  {formik.touched.dob && formik.errors.dob ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.dob}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                  <p className="text-red-400">{"\u00A0"}</p>
+                </div>
+              </>
+            ) : step === 1 ? (
+              <>
+                <div className="form-group ">
+                  <label htmlFor="street" className="label-input">
+                    street address
+                  </label>
+                  <input
+                    className="input-form"
+                    type="text"
+                    id="street"
+                    name="street"
+                    value={formik.values.street}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.street && formik.errors.street ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.street}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="province" className="label-input">
+                    province
+                  </label>
+                  <select
+                    className="input-form"
+                    id="province"
+                    name="province"
+                    value={formik.values.province}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    required
+                  >
+                    {ListOfProvinsi.map((option, index) => (
+                      <option key={index} value={option.value}>
+                        {option.provinsi}
+                      </option>
+                    ))}
+                  </select>
+                  {formik.touched.province && formik.errors.province ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.province}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="city" className="label-input">
+                    City
+                  </label>
+                  <select
+                    className="input-form"
+                    id="city"
+                    name="city"
+                    value={formik.values.city}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    required
+                  >
+                    {ListOfCity[formik.values.province]?.map((option) => (
+                      <option value={option.kota}>{option.kota}</option>
+                    ))}
+                  </select>
+                  <p className="text-red-400">{"\u00A0"}</p>
+                  {formik.touched.city && formik.errors.city ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.city}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+              </>
+            ) : step === 2 ? (
+              <>
+                <div className="form-group ">
+                  <label htmlFor="username" className="label-input">
+                    username
+                  </label>
+                  <input
+                    className="input-form"
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.username && formik.errors.username ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.username}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password" className="label-input">
+                    password
+                  </label>
+                  <input
+                    className="input-form"
+                    type="password"
+                    id="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.password}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="confirmPassword" className="label-input">
+                    Confirm Password
+                  </label>
+                  <input
+                    className="input-form"
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.confirmPassword}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div>{"\u00A0"}</div>
+            )}
+            <div className="button-form-group ">
+              <button
+                className="back-button"
+                onClick={back}
+                type="button"
+                disabled={isFirstStep}
+              >
+                back
+              </button>
+              {isLastStep ? (
+                <button className="next-button" type="submit">
+                  Finish
                 </button>
-                {isLastStep ? (
-                  <button className="next-button" type="submit">
-                    Finish
-                  </button>
-                ) : (
-                  <button className="next-button" type="button" onClick={next}>
-                    Next
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
-        )}
+              ) : (
+                <button className="next-button" type="button" onClick={next}>
+                  Next
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,13 @@ import UserDataContext from "./context/UserDataContext";
 import { RegsiterDataContextType } from "./utils.ts";
 
 const Main = () => {
-  const userData = useState(null as RegsiterDataContextType | null);
+  const userData = useState(
+    localStorage.getItem("userdata")
+      ? (JSON.parse(
+          localStorage.getItem("userdata")
+        ) as RegsiterDataContextType)
+      : (null as RegsiterDataContextType | null)
+  );
   return (
     <React.StrictMode>
       <BrowserRouter>
