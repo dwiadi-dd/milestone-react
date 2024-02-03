@@ -7,6 +7,8 @@ export default function Welcome() {
 
   return (
     <div className=" flex flex-col mx-auto">
+      <h1>hallo ges</h1>
+      {JSON.stringify(userData)}
       {userData ? (
         <>
           <h1 className="text-center text-4xl font-semibold tracking-widest">

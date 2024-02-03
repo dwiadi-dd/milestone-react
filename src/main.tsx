@@ -4,11 +4,11 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Welcome from "./components/Welcome.tsx";
-import UserDataContext from "./context/UserDataContext.tsx";
-import { RegsiterDataType } from "./utils.ts";
+import UserDataContext from "./context/UserDataContext";
+import { RegsiterDataContextType } from "./utils.ts";
 
 const Main = () => {
-  const userData = useState(null as RegsiterDataType | null);
+  const userData = useState(null as RegsiterDataContextType | null);
   return (
     <React.StrictMode>
       <BrowserRouter>

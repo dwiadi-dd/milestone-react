@@ -28,7 +28,7 @@ export type RegsiterDataContextType = {
 };
 
 export type RegsiterDataTypeObject = {
-  registerData: RegsiterDataType;
+  registerData: RegsiterDataContextType;
 };
 
 interface City {

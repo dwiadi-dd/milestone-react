@@ -91,11 +91,8 @@ function App() {
 
     onSubmit: (values) => {
       if (!isLastStep) return next();
-      setRegisterData(values);
       setUserData(values);
-      navigate("/success");
-
-      setIsSuccess(true);
+      navigate("/user");
     },
   });
 
@@ -120,7 +117,7 @@ function App() {
       <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
         {isSuccess ? (
           <>
-            <Welcome registerData={registerData} />
+            <Welcome />
           </>
         ) : (
           <div className="step-form">
