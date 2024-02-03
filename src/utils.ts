@@ -16,6 +16,17 @@ export type RegsiterDataType = {
   password: string | null;
 };
 
+export type RegsiterDataContextType = {
+  fullname: string;
+  email: string;
+  dob: string;
+  street: string;
+  city: string;
+  province: string;
+  username: string;
+  password: string;
+};
+
 export type RegsiterDataTypeObject = {
   registerData: RegsiterDataType;
 };
