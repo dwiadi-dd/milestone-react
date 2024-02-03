@@ -10,9 +10,7 @@ import { RegsiterDataContextType } from "./utils.ts";
 const Main = () => {
   const userData = useState(
     localStorage.getItem("userdata")
-      ? (JSON.parse(
-          localStorage.getItem("userdata")
-        ) as RegsiterDataContextType)
+      ? JSON.parse(localStorage.getItem("userdata") as string)
       : (null as RegsiterDataContextType | null)
   );
   return (

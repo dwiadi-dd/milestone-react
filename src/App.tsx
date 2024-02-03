@@ -1,12 +1,6 @@
 import { useContext, useState } from "react";
 import logo from "./assets/FA_DIGICAMP_LOGO_WHITE.png";
-import {
-  RegsiterDataType,
-  stepList,
-  ListOfCity,
-  ListOfProvinsi,
-} from "./utils";
-import Welcome from "./components/Welcome";
+import { stepList, ListOfCity, ListOfProvinsi } from "./utils";
 import Stepper from "./components/Stepper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
