@@ -12,8 +12,7 @@ export default function Welcome() {
   };
 
   return (
-    <div className=" flex flex-col mx-auto">
-      <h1>hallo ges</h1>
+    <div className=" flex flex-col mx-auto gap-4 justify-center min-h-screen justify-items-center">
       {userData ? (
         <>
           <h1 className="text-center text-4xl font-semibold tracking-widest">
@@ -59,13 +58,13 @@ export default function Welcome() {
           </div>
         </>
       ) : (
-        <div className="flex flex-col gap-4 justify-center ">
-          <h1>you dont have account yet please register</h1>
-          <div className="justify-evenly">
-            <Link to={"/"}>
-              <button className="next-button">register</button>
+        <div className="flex flex-col mx-auto justify-items-center ">
+          <h1>
+            you dont have account yet please register{" "}
+            <Link to={"/"} className="font-semibold hover:opacity-40">
+              click here to register
             </Link>
-          </div>
+          </h1>
         </div>
       )}
     </div>
