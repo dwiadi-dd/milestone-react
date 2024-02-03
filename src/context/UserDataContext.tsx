@@ -1,18 +1,21 @@
 import { createContext } from "react";
-import { RegsiterDataType } from "../utils";
+import { RegsiterDataContextType } from "../utils";
 
 const UserDataContext = createContext<
-  [RegsiterDataType | null, (registerData: RegsiterDataType) => void]
+  [
+    RegsiterDataContextType | null,
+    (registerData: RegsiterDataContextType) => void
+  ]
 >([
   {
-    fullname: "",
-    email: "",
+    fullname: "a",
+    email: "a",
     dob: "2004-01-01",
-    street: "",
-    city: "",
+    street: "a",
+    city: "a",
     province: "banten",
-    username: "",
-    password: "",
+    username: "a",
+    password: "a",
   },
   () => {},
 ]);

@@ -15,6 +15,7 @@ const Main = () => {
         <UserDataContext.Provider value={userData}>
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="/user" element={<Welcome />} />
           </Routes>
         </UserDataContext.Provider>
       </BrowserRouter>

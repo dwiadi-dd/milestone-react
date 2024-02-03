@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "./assets/FA_DIGICAMP_LOGO_WHITE.png";
 import {
   RegsiterDataType,
@@ -10,11 +10,14 @@ import Welcome from "./components/Welcome";
 import Stepper from "./components/Stepper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import UserDataContext from "./context/UserDataContext";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
-
+  const [, setUserData] = useContext(UserDataContext);
   const [registerData, setRegisterData] = useState<RegsiterDataType>({
     fullname: "",
     email: "",
@@ -89,6 +92,9 @@ function App() {
     onSubmit: (values) => {
       if (!isLastStep) return next();
       setRegisterData(values);
+      setUserData(values);
+      navigate("/success");
+
       setIsSuccess(true);
     },
   });
