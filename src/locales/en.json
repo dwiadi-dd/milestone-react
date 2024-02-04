@@ -12,5 +12,18 @@
   "form.address": "Address",
   "form.cityplaceholder": "Enter your city",
   "form.provinceplaceholder": "Enter your province",
-  "form.dob": "Date of Birth"
+  "form.dob": "Date of Birth",
+
+  "validation.dob.required": "Date of birth is required",
+  "validation.city.required": "City is required",
+  "validation.province.required": "Province is required",
+  "validation.address.required": "Address is required",
+  "validation.username.required": "Username is required",
+  "validation.username.max": "Username maximum length is 15 characters",
+  "validation.username.min": "Username minimum length is 4 characters",
+  "validation.password.required": "Password is required",
+  "validation.password.matches": "Password must be at least 8 characters long, contain uppercase letters, lowercase letters, numbers, and special characters",
+  "validation.password.max": "Password maximum length is 18 characters",
+  "validation.confirmPassword.required": "Confirm password is required",
+  "validation.confirmPassword.oneOf": "Password does not match"
 }

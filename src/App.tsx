@@ -61,14 +61,14 @@ function App() {
       province: Yup.string().required("Province is required"),
       username: Yup.string()
         .required("Username is required")
-        .max(24, "Us can be maximum 24 characters"),
+        .max(15, "Us can be maximum 15 characters"),
       password: Yup.string()
         .required("Password is required")
         .matches(
           passwordRules,
           "password must contain at least min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit."
         )
-        .max(24, "Password can be maximum 24 characters"),
+        .max(18, "Password can be maximum 18 characters"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), ""], "Passwords must match")
         .required("Required"),
