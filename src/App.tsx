@@ -6,11 +6,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import UserDataContext from "./context/UserDataContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [, setUserData] = useContext(UserDataContext);
+  const { t } = useTranslation();
 
   const isFirstStep = step === 0;
   const isLastStep = step === stepList.length - 1;
@@ -105,7 +107,7 @@ function App() {
               <>
                 <div className="form-group ">
                   <label htmlFor="fullname" className="label-input">
-                    Full Name
+                    {t(`form.fullname`)}
                   </label>
                   <input
                     className="input-form"
@@ -126,7 +128,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="email" className="label-input">
-                    Email
+                    {t(`form.email`)}
                   </label>
                   <input
                     className="input-form"
@@ -147,7 +149,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="dob" className="label-input">
-                    Date of Birth
+                    {t(`form.dob`)}
                   </label>
                   <input
                     className="input-form"
@@ -173,7 +175,7 @@ function App() {
               <>
                 <div className="form-group ">
                   <label htmlFor="street" className="label-input">
-                    street address
+                    {t(`form.street`)}
                   </label>
                   <input
                     className="input-form"
@@ -194,7 +196,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="province" className="label-input">
-                    province
+                    {t(`form.province`)}
                   </label>
                   <select
                     className="input-form"
@@ -221,7 +223,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="city" className="label-input">
-                    City
+                    {t(`form.city`)}
                   </label>
                   <select
                     className="input-form"
@@ -271,7 +273,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password" className="label-input">
-                    password
+                    {t(`form.password`)}
                   </label>
                   <input
                     className="input-form"
@@ -291,7 +293,7 @@ function App() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="confirmPassword" className="label-input">
-                    Confirm Password
+                    {t(`form.confirmPassword`)}
                   </label>
                   <input
                     className="input-form"

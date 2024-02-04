@@ -1,4 +1,16 @@
 {
   "register": "kamu belum memiliki akun",
-  "registerLink": "klik ini untuk mendaftarx"
+  "registerLink": "klik ini untuk mendaftar",
+
+  "form.fullname": "Nama Lengkap",
+  "form.email": "Email",
+  "form.password": "Kata Sandi",
+  "form.confirmPassword": "Konfirmasi Kata Sandi",
+  "form.submit": "Daftar",
+  "form.city": "Kota",
+  "form.province": "Provinsi",
+  "form.provincePlaceholder": "Pilih Provinsi",
+  "form.cityPlaceholder": "Pilih Kota",
+  "form.address": "Alamat",
+  "form.dob": "Tanggal Lahir"
 }

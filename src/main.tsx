@@ -22,10 +22,16 @@ const Main = () => {
   };
   return (
     <React.StrictMode>
-      <select onChange={(e) => changeLanguage(e.target.value)}>
-        <option value="en">English</option>
-        <option value="id">Indonesia</option>
-      </select>
+      <div className="absolute right-4 top-4">
+        <select
+          className="px-4 py-2 rounded-xl cursor-pointer"
+          onChange={(e) => changeLanguage(e.target.value)}
+        >
+          <option value="en">🇺🇸 EN</option>
+          <option value="id">🇮🇩 ID</option>
+        </select>
+      </div>
+
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
           <Routes>

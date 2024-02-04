@@ -1,4 +1,16 @@
 {
   "register": "you dont have account yet please register",
-  "registerLink": "click here to register"
+  "registerLink": "click here to register",
+
+  "form.fullname": "Full Name",
+  "form.email": "Email",
+  "form.password": "Password",
+  "form.confirmPassword": "Confirm Password",
+  "form.submit": "Submit",
+  "form.city": "City",
+  "form.province": "Province",
+  "form.address": "Address",
+  "form.cityplaceholder": "Enter your city",
+  "form.provinceplaceholder": "Enter your province",
+  "form.dob": "Date of Birth"
 }
