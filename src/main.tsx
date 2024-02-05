@@ -24,7 +24,7 @@ const Main = () => {
     <React.StrictMode>
       <div className="absolute right-4 top-4">
         <select
-          className="px-4 py-2 rounded-xl cursor-pointer"
+          className="px-4 py-2 rounded-xl cursor-pointer bg-zinc-100"
           onChange={(e) => changeLanguage(e.target.value)}
         >
           <option value="en">🇺🇸 EN</option>

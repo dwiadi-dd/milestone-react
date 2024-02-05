@@ -3,7 +3,7 @@
   "registerLink": "klik ini untuk mendaftar",
 
   "form.fullname": "Nama Lengkap",
-  "form.email": "Email",
+  "form.email": "Surel",
   "form.password": "Kata Sandi",
   "form.confirmPassword": "Konfirmasi Kata Sandi",
   "form.submit": "Daftar",
@@ -14,22 +14,42 @@
   "form.address": "Alamat",
   "form.dob": "Tanggal Lahir",
 
-  "validation.fullname.required": "Nama lengkap harus diisi",
-  "validation.fullname.min": "Nama lengkap minimal 4 karakter",
+  "form.validation.fullname.required": "Nama lengkap harus diisi",
+  "form.validation.fullname.min": "Nama lengkap minimal 4 karakter",
 
-  "validation.email.required": "Email harus diisi",
-  "validation.email.email": "Email tidak valid",
+  "form.validation.email.required": "Email harus diisi",
+  "form.validation.email.email": "Email tidak valid",
 
-  "validation.dob.required": "Tanggal lahir harus diisi",
-  "validation.city.required": "Kota harus diisi",
-  "validation.province.required": "Provinsi harus diisi",
-  "validation.address.required": "Alamat harus diisi",
-  "validation.username.required": "Username harus diisi",
-  "validation.username.max": "Username maksimal 15 karakter",
-  "validation.username.min": "Username minimal 4 karakter",
-  "validation.password.required": "Kata sandi harus diisi",
-  "validation.password.matches": "Kata sandi minimal 8 karakter, mengandung huruf besar, huruf kecil, angka, dan karakter spesial",
-  "validation.password.max": "Kata sandi maksimal 18 karakter",
-  "validation.confirmPassword.required": "Konfirmasi kata sandi harus diisi",
-  "validation.confirmPassword.oneOf": "Kata sandi tidak sesuai"
+  "form.validation.dob.required": "Tanggal lahir harus diisi",
+  "form.validation.city.required": "Kota harus diisi",
+  "form.validation.province.required": "Provinsi harus diisi",
+  "form.validation.address.required": "Alamat harus diisi",
+  "form.validation.username.required": "Username harus diisi",
+  "form.validation.username.max": "Username maksimal 15 karakter",
+  "form.validation.username.min": "Username minimal 4 karakter",
+  "form.validation.password.required": "Kata sandi harus diisi",
+  "form.validation.password.matches": "Kata sandi minimal 8 karakter, mengandung huruf besar, huruf kecil, angka, dan karakter spesial",
+  "form.validation.password.max": "Kata sandi maksimal 18 karakter",
+  "form.validation.confirmPassword.required": "Konfirmasi kata sandi harus diisi",
+  "form.validation.confirmPassword.oneOf": "Kata sandi tidak sesuai",
+  "stepList": [
+    {
+      "id": 1,
+      "title": "informasi pribadi",
+      "alt": "silakan berikan informasi pribadi Anda",
+      "desc": "silakan berikan informasi pribadi Anda"
+    },
+    {
+      "id": 2,
+      "title": "informasi alamat",
+      "alt": "silakan berikan alamat saat ini",
+      "desc": "silakan berikan informasi pribadi Anda"
+    },
+    {
+      "id": 3,
+      "title": "informasi akun",
+      "alt": "atur nama pengguna dan kata sandi Anda",
+      "desc": "silakan berikan informasi pribadi Anda"
+    }
+  ]
 }

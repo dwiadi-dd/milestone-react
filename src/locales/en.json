@@ -14,16 +14,42 @@
   "form.provinceplaceholder": "Enter your province",
   "form.dob": "Date of Birth",
 
-  "validation.dob.required": "Date of birth is required",
-  "validation.city.required": "City is required",
-  "validation.province.required": "Province is required",
-  "validation.address.required": "Address is required",
-  "validation.username.required": "Username is required",
-  "validation.username.max": "Username maximum length is 15 characters",
-  "validation.username.min": "Username minimum length is 4 characters",
-  "validation.password.required": "Password is required",
-  "validation.password.matches": "Password must be at least 8 characters long, contain uppercase letters, lowercase letters, numbers, and special characters",
-  "validation.password.max": "Password maximum length is 18 characters",
-  "validation.confirmPassword.required": "Confirm password is required",
-  "validation.confirmPassword.oneOf": "Password does not match"
+  "form.validation.fullname.required": "Full name is required",
+  "form.validation.fullname.min": "Full name must be at least 4 characters",
+
+  "form.validation.email.required": "Email is required",
+  "form.validation.email.email": "Invalid email",
+
+  "form.validation.dob.required": "Date of birth is required",
+  "form.validation.city.required": "City is required",
+  "form.validation.province.required": "Province is required",
+  "form.validation.address.required": "Address is required",
+  "form.validation.username.required": "Username is required",
+  "form.validation.username.max": "Username maximum length is 15 characters",
+  "form.validation.username.min": "Username minimum length is 4 characters",
+  "form.validation.password.required": "Password is required",
+  "form.validation.password.matches": "Password must be at least 8 characters long, contain uppercase letters, lowercase letters, numbers, and special characters",
+  "form.validation.password.max": "Password maximum length is 18 characters",
+  "form.validation.confirmPassword.required": "Confirm password is required",
+  "form.validation.confirmPassword.oneOf": "Password does not match",
+  "stepList": [
+    {
+      "id": 1,
+      "title": "personal information",
+      "alt": "please provide your personal information",
+      "desc": "please provide your personal information"
+    },
+    {
+      "id": 2,
+      "title": "address information",
+      "alt": "please provide current address",
+      "desc": "please provide your personal information"
+    },
+    {
+      "id": 3,
+      "title": "account information",
+      "alt": "setup your username and password",
+      "desc": "please provide your personal information"
+    }
+  ]
 }

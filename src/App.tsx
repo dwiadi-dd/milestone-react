@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import logo from "./assets/FA_DIGICAMP_LOGO_WHITE.png";
-import { stepList, ListOfCity, ListOfProvinsi } from "./utils";
+import { ListOfCity, ListOfProvinsi } from "./utils";
 import Stepper from "./components/Stepper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,14 +13,15 @@ function App() {
   const [step, setStep] = useState(0);
   const [, setUserData] = useContext(UserDataContext);
   const { t } = useTranslation();
+  const stepList = t("stepList", { returnObjects: true }) as [];
 
   const isFirstStep = step === 0;
-  const isLastStep = step === stepList.length - 1;
+  const isLastStep = step === 2;
 
   const next = () => {
     console.log("next");
     setStep((i) => {
-      if (i >= stepList.length - 1) return i;
+      if (i >= 2) return i;
       return i + 1;
     });
   };
@@ -50,30 +51,26 @@ function App() {
     },
     validationSchema: Yup.object({
       fullname: Yup.string()
-        .required("Fullname is required")
-        .min(4, "Fullname must be at least 4 characters"),
+        .required(t(`form.validation.fullname.required`))
+        .min(4, t(`form.validation.fullname.min`)),
       email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      dob: Yup.date().required("Date of birth is required"),
-      street: Yup.string().required("Street is required"),
-      city: Yup.string().required("City is required"),
-      province: Yup.string().required("Province is required"),
+        .email(t(`form.validation.invalidEmail`))
+        .required(t(`form.validation.email.required`)),
+      dob: Yup.date().required(t(`form.validation.dob.required`)),
+      street: Yup.string().required(t(`form.validation.street.required`)),
+      city: Yup.string().required(t(`form.validation.city.required`)),
+      province: Yup.string().required(t(`form.validation.province.required`)),
       username: Yup.string()
-        .required("Username is required")
-        .max(15, "Us can be maximum 15 characters"),
+        .required(t(`form.validation.username.required`))
+        .max(15, t(`form.validation.usernameMaxLength`)),
       password: Yup.string()
-        .required("Password is required")
-        .matches(
-          passwordRules,
-          "password must contain at least min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit."
-        )
-        .max(18, "Password can be maximum 18 characters"),
+        .required(t(`form.validation.password.required`))
+        .matches(passwordRules, t(`form.validation.passwordPattern`))
+        .max(18, t(`form.validation.passwordMaxLength`)),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), ""], "Passwords must match")
-        .required("Required"),
+        .oneOf([Yup.ref(`password`), ""], t(`form.validation.passwordMatch`))
+        .required(t(`form.validation.confirmPassword.required`)),
     }),
-
     onSubmit: (values) => {
       if (!isLastStep) return next();
       setUserData(values);
@@ -93,12 +90,12 @@ function App() {
           />
         </header>
 
-        <Stepper step={step} stepList={stepList} />
+        <Stepper step={step} />
       </div>
       <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
         <div className="step-form">
-          <h1 className="form-title ">{stepList[step].title}</h1>
-          <h3 className="form-desc">{stepList[step].desc}</h3>
+          <h1 className="form-title ">{stepList[step]["title"]}</h1>
+          <h3 className="form-desc">{stepList[step]["desc"]}</h3>
           <form
             className="form-registration mt-10 grid gap-1"
             onSubmit={formik.handleSubmit}

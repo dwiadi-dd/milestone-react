@@ -1,11 +1,15 @@
-export type StepListType = {
+export interface StepListType {
   id: number;
   title: string;
   alt: string;
   desc: string;
-}[];
+}
 
-export type RegsiterDataType = {
+export interface StepListTypeObject {
+  stepList: StepListType[];
+}
+
+export interface RegsiterDataType {
   fullname: string | null;
   email: string | null;
   dob: string | null;
@@ -14,9 +18,9 @@ export type RegsiterDataType = {
   province: string;
   username: string | null;
   password: string | null;
-};
+}
 
-export type RegsiterDataContextType = {
+export interface RegsiterDataContextType {
   fullname: string;
   email: string;
   dob: string;
@@ -25,11 +29,11 @@ export type RegsiterDataContextType = {
   province: string;
   username: string;
   password: string;
-};
+}
 
-export type RegsiterDataTypeObject = {
+export interface RegsiterDataTypeObject {
   registerData: RegsiterDataContextType;
-};
+}
 
 interface City {
   kota: string;
@@ -59,6 +63,7 @@ export const stepList = [
     desc: "please provide your personal information",
   },
 ];
+
 export const ListOfProvinsi = [
   { provinsi: "Banten", value: "banten" },
   { provinsi: "DKI Jakarta", value: "dki" },
