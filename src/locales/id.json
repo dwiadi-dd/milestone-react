@@ -60,6 +60,6 @@
   "user.dob": "Tanggal Lahir",
   "user.email": "Surel",
   "user.address": "Alamat",
-  "user.kembali": "Kembali",
+  "user.back": "Kembali",
   "user.clear": "Hapus Akun"
 }
