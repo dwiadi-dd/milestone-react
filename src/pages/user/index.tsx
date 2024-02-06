@@ -29,33 +29,38 @@ export default function Welcome() {
           <p className="font-light"></p>
           <div className="flex flex-col justify-center mx-auto gap-4 w-[1000px]">
             <div className="detail-group gap-4">
-              <p className="capitalize text-xl font-light">Name:</p>
+              <p className="capitalize text-xl font-light">{t("user.name")}:</p>
               <p className="text-xl font-semibold">{userData.fullname}</p>
             </div>
             <div className="detail-group gap-4">
-              <p className="capitalize text-xl font-light">Email:</p>
+              <p className="capitalize text-xl font-light">
+                {t("user.email")}:
+              </p>
               <p className="text-xl font-semibold">{userData.email}</p>
             </div>
             <div className="detail-group gap-4">
-              <p className="capitalize text-xl font-light">Date of Birth:</p>
+              <p className="capitalize text-xl font-light">{t("user.dob")}:</p>
               <p className="text-xl font-semibold">{userData.dob}</p>
             </div>
             <div className="detail-group gap-4">
-              <p className="capitalize text-xl font-light">Address:</p>
+              <p className="capitalize text-xl font-light">
+                {t("user.address")}:
+              </p>
               <p className="text-xl font-semibold">
-                {userData.address}, {userData.city}, {userData.province}
+                {userData.address}, {userData.city}, {userData.province},{" "}
+                {userData.zipcode}
               </p>
             </div>
             <div className="justify-evenly flex border-2 border-sky-400">
               <Link to={"/"}>
-                <button className="next-button">Back</button>
+                <button className="next-button">{t("user.back")}</button>
               </Link>
               <button
-                className="next-button"
+                className="next-button text-ellipsis"
                 type="button"
                 onClick={removeData}
               >
-                clear data
+                {t("user.clear")}
               </button>
             </div>
           </div>

@@ -53,5 +53,13 @@
       "alt": "atur nama pengguna dan kata sandi Anda",
       "desc": "silakan berikan informasi pribadi Anda"
     }
-  ]
+  ],
+
+  "user.greeting": "Selamat datang, {name}!",
+  "user.name": "Nama",
+  "user.dob": "Tanggal Lahir",
+  "user.email": "Surel",
+  "user.address": "Alamat",
+  "user.kembali": "Kembali",
+  "user.clear": "Hapus Akun"
 }

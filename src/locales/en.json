@@ -53,5 +53,12 @@
       "alt": "setup your username and password",
       "desc": "please provide your personal information"
     }
-  ]
+  ],
+  "user.greeting": "Welcome, {name}!",
+  "user.name": "Name",
+  "user.email": "Surel",
+  "user.dob": "Date of Birth",
+  "user.address": "Address",
+  "user.kembali": "Back",
+  "user.clear": "Clear Data"
 }
