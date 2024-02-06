@@ -12,6 +12,7 @@
   "form.provincePlaceholder": "Pilih Provinsi",
   "form.cityPlaceholder": "Pilih Kota",
   "form.address": "Alamat",
+  "form.zipcode": "Kode Pos",
   "form.dob": "Tanggal Lahir",
 
   "form.validation.fullname.required": "Nama lengkap harus diisi",
@@ -24,6 +25,7 @@
   "form.validation.city.required": "Kota harus diisi",
   "form.validation.province.required": "Provinsi harus diisi",
   "form.validation.address.required": "Alamat harus diisi",
+  "form.validation.zipcode.required": "Kode Pos harus diisi",
   "form.validation.username.required": "Username harus diisi",
   "form.validation.username.max": "Username maksimal 15 karakter",
   "form.validation.username.min": "Username minimal 4 karakter",

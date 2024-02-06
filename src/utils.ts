@@ -13,7 +13,8 @@ export interface RegsiterDataType {
   fullname: string | null;
   email: string | null;
   dob: string | null;
-  street: string | null;
+  address: string | null;
+  zipcode: string | null;
   city: string | null;
   province: string;
   username: string | null;
@@ -24,7 +25,8 @@ export interface RegsiterDataContextType {
   fullname: string;
   email: string;
   dob: string;
-  street: string;
+  address: string;
+  zipcode: string;
   city: string;
   province: string;
   username: string;

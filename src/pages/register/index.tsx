@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import logo from "./assets/FA_DIGICAMP_LOGO_WHITE.png";
-import { ListOfCity, ListOfProvinsi } from "./utils";
-import Stepper from "./components/Stepper";
+import logo from "../../assets/FA_DIGICAMP_LOGO_WHITE.png";
+import { ListOfCity, ListOfProvinsi } from "../../utils";
+import Stepper from "../../components/Stepper";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import UserDataContext from "./context/UserDataContext";
+import UserDataContext from "../../context/UserDataContext";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -41,8 +41,9 @@ function App() {
     initialValues: {
       fullname: "",
       email: "",
-      dob: "2004-01-01",
-      street: "",
+      dob: "",
+      address: "",
+      zipcode: "",
       city: "",
       province: "banten",
       username: "",
@@ -57,18 +58,23 @@ function App() {
         .email(t(`form.validation.invalidEmail`))
         .required(t(`form.validation.email.required`)),
       dob: Yup.date().required(t(`form.validation.dob.required`)),
-      street: Yup.string().required(t(`form.validation.street.required`)),
+      address: Yup.string().required(t(`form.validation.address.required`)),
+      zipcode: Yup.string().required(t(`form.validation.zipcode.required`)),
       city: Yup.string().required(t(`form.validation.city.required`)),
       province: Yup.string().required(t(`form.validation.province.required`)),
       username: Yup.string()
         .required(t(`form.validation.username.required`))
-        .max(15, t(`form.validation.usernameMaxLength`)),
+        .max(15, t(`form.validation.username.max`))
+        .min(4, t(`form.validation.username.min`)),
       password: Yup.string()
         .required(t(`form.validation.password.required`))
-        .matches(passwordRules, t(`form.validation.passwordPattern`))
-        .max(18, t(`form.validation.passwordMaxLength`)),
+        .matches(passwordRules, t(`form.validation.password.matches`))
+        .max(18, t(`form.validation.password.max`)),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref(`password`), ""], t(`form.validation.passwordMatch`))
+        .oneOf(
+          [Yup.ref(`password`), ""],
+          t(`form.validation.confirmPassword.oneOf`)
+        )
         .required(t(`form.validation.confirmPassword.required`)),
     }),
     onSubmit: (values) => {
@@ -135,6 +141,7 @@ function App() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    disabled={formik.values.fullname === "" ? true : false}
                   />
                   {formik.touched.email && formik.errors.email ? (
                     <div className="font-light text-red-600">
@@ -171,21 +178,21 @@ function App() {
             ) : step === 1 ? (
               <>
                 <div className="form-group ">
-                  <label htmlFor="street" className="label-input">
-                    {t(`form.street`)}
+                  <label htmlFor="address" className="label-input">
+                    {t(`form.address`)}
                   </label>
                   <input
                     className="input-form"
                     type="text"
-                    id="street"
-                    name="street"
-                    value={formik.values.street}
+                    id="address"
+                    name="address"
+                    value={formik.values.address}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  {formik.touched.street && formik.errors.street ? (
+                  {formik.touched.address && formik.errors.address ? (
                     <div className="font-light text-red-600">
-                      {formik.errors.street}
+                      {formik.errors.address}
                     </div>
                   ) : (
                     <div>{"\u00A0"}</div>
@@ -239,6 +246,27 @@ function App() {
                   {formik.touched.city && formik.errors.city ? (
                     <div className="font-light text-red-600">
                       {formik.errors.city}
+                    </div>
+                  ) : (
+                    <div>{"\u00A0"}</div>
+                  )}
+                </div>
+                <div className="form-group ">
+                  <label htmlFor="zipcode" className="label-input">
+                    {t(`form.zipcode`)}
+                  </label>
+                  <input
+                    className="input-form"
+                    type="text"
+                    id="zipcode"
+                    name="zipcode"
+                    value={formik.values.zipcode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.touched.zipcode && formik.errors.zipcode ? (
+                    <div className="font-light text-red-600">
+                      {formik.errors.zipcode}
                     </div>
                   ) : (
                     <div>{"\u00A0"}</div>

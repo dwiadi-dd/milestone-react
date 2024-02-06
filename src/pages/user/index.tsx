@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import avatar from "../assets/avatar.png";
-import UserDataContext from "../context/UserDataContext";
+import avatar from "../../assets/avatar.png";
+import UserDataContext from "../../context/UserDataContext";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 

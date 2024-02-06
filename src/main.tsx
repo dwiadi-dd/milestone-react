@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import RegisterPge from "./pages/register/index.tsx";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Welcome from "./components/Welcome.tsx";
+import UserPage from "./pages/user/index.tsx";
 import UserDataContext from "./context/UserDataContext";
 import { RegsiterDataContextType } from "./utils.ts";
 import "./locales/locales.ts";
@@ -35,8 +35,8 @@ const Main = () => {
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
           <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/user" element={<Welcome />} />
+            <Route path="/" element={<RegisterPge />} />
+            <Route path="/user" element={<UserPage />} />
           </Routes>
         </UserDataContext.Provider>
       </BrowserRouter>
