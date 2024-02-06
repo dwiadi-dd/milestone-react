@@ -43,7 +43,7 @@ export default function Welcome() {
             <div className="detail-group gap-4">
               <p className="capitalize text-xl font-light">Address:</p>
               <p className="text-xl font-semibold">
-                {userData.street}, {userData.city}, {userData.province}
+                {userData.address}, {userData.city}, {userData.province}
               </p>
             </div>
             <div className="justify-evenly flex border-2 border-sky-400">

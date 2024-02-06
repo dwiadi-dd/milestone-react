@@ -18,12 +18,44 @@ function App() {
   const isFirstStep = step === 0;
   const isLastStep = step === 2;
 
+  const validateStep = (step: number) => {
+    if (step === 0) {
+      if (formik.errors.fullname || formik.errors.email || formik.errors.dob)
+        return false;
+      return true;
+    }
+    if (step === 1) {
+      if (
+        formik.errors.address ||
+        formik.errors.zipcode ||
+        formik.errors.city ||
+        formik.errors.province
+      )
+        return false;
+      return true;
+    }
+    if (step === 2) {
+      if (
+        formik.errors.username ||
+        formik.errors.password ||
+        formik.errors.confirmPassword
+      )
+        return false;
+      return true;
+    }
+    return true;
+  };
+
   const next = () => {
     console.log("next");
+    console.log(formik.errors);
+    if (!validateStep(step)) return;
     setStep((i) => {
       if (i >= 2) return i;
       return i + 1;
     });
+
+    return;
   };
 
   const back = () => {
@@ -45,7 +77,7 @@ function App() {
       address: "",
       zipcode: "",
       city: "",
-      province: "banten",
+      province: "",
       username: "",
       password: "",
       confirmPassword: "",
@@ -55,7 +87,7 @@ function App() {
         .required(t(`form.validation.fullname.required`))
         .min(4, t(`form.validation.fullname.min`)),
       email: Yup.string()
-        .email(t(`form.validation.invalidEmail`))
+        .email(t(`form.validation.email.email`))
         .required(t(`form.validation.email.required`)),
       dob: Yup.date().required(t(`form.validation.dob.required`)),
       address: Yup.string().required(t(`form.validation.address.required`)),
@@ -120,6 +152,7 @@ function App() {
                     value={formik.values.fullname}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    autoFocus
                   />
                   {formik.touched.fullname && formik.errors.fullname ? (
                     <div className="font-light text-red-600">
@@ -141,7 +174,6 @@ function App() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    disabled={formik.values.fullname === "" ? true : false}
                   />
                   {formik.touched.email && formik.errors.email ? (
                     <div className="font-light text-red-600">
