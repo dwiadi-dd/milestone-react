@@ -33,7 +33,7 @@ export default function Welcome() {
           <div className="flex flex-col justify-center mx-auto gap-4 w-[1000px]">
             <div className="detail-group gap-4">
               <p className="capitalize text-xl font-light">{t("user.name")}:</p>
-              <p className="text-xl font-semibold" data-testid="fullname">
+              <p className="text-xl font-semibold" data-testid="test-fullname">
                 {userData.fullname}
               </p>
             </div>
@@ -41,13 +41,13 @@ export default function Welcome() {
               <p className="capitalize text-xl font-light">
                 {t("user.email")}:
               </p>
-              <p className="text-xl font-semibold" data-testid="email">
+              <p className="text-xl font-semibold" data-testid="test-email">
                 {userData.email}
               </p>
             </div>
             <div className="detail-group gap-4">
               <p className="capitalize text-xl font-light">{t("user.dob")}:</p>
-              <p className="text-xl font-semibold" data-testid="dob">
+              <p className="text-xl font-semibold" data-testid="test-dob">
                 {userData.dob}
               </p>
             </div>
@@ -55,8 +55,8 @@ export default function Welcome() {
               <p className="capitalize text-xl font-light">
                 {t("user.address")}:
               </p>
-              <p className="text-xl font-semibold" data-testid="address">
-                {userData.address}, {userData.city}, {userData.province},{" "}
+              <p className="text-xl font-semibold" data-testid="test-address">
+                {userData.address}, {userData.city}, {userData.province}, {""}
                 {userData.zipcode}. {userData.password}
               </p>
             </div>

@@ -30,14 +30,16 @@ test("renders welcome message when user data is present", () => {
   );
 
   const greeting = screen.getByTestId(`greeting-user`);
-  expect(greeting).toString(`Welcome ${userData.username}`);
+  const email = screen.getByTestId(`test-email`);
+  const dob = screen.getByTestId(`test-dob`);
+  const address = screen.getByTestId(`test-address`);
+  const fullname = screen.getByTestId(`test-fullname`);
 
-  const fullname = screen.getByTestId(`fullname`);
-  expect(fullname).toString(userData.fullname);
-
-  const email = screen.getByTestId(`email`);
-  expect(email).toString(userData.email);
-
-  const dob = screen.getByTestId(`dob`);
-  expect(dob).toString(userData.dob);
+  expect(greeting.textContent).toEqual(`Welcome ${userData.username}!`);
+  expect(email.textContent).toEqual(`${userData.email}`);
+  expect(dob.textContent).toEqual(`${userData.dob}`);
+  expect(address.textContent).toEqual(
+    `${userData.address}, ${userData.city}, ${userData.province}, ${userData.zipcode}. ${userData.password}`
+  );
+  expect(fullname.textContent).toEqual(`${userData.fullname}`);
 });
