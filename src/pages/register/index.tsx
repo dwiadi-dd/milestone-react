@@ -130,6 +130,7 @@ function App() {
 
         <Stepper step={step} />
       </div>
+
       <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
         <div className="step-form">
           <h1 className="form-title ">{stepList[step]["title"]}</h1>
@@ -153,6 +154,7 @@ function App() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     autoFocus
+                    data-testid="fullname-input"
                   />
                   {formik.touched.fullname && formik.errors.fullname ? (
                     <div className="font-light text-red-600">
@@ -174,9 +176,10 @@ function App() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="email-input"
                   />
                   {formik.touched.email && formik.errors.email ? (
-                    <div className="font-light text-red-600">
+                    <div className="font-light text-red-600" role="alert">
                       {formik.errors.email}
                     </div>
                   ) : (
@@ -196,6 +199,7 @@ function App() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     max="2006-01-01"
+                    data-testid="dob-input"
                   />
                   {formik.touched.dob && formik.errors.dob ? (
                     <div className="font-light text-red-600">
@@ -221,6 +225,7 @@ function App() {
                     value={formik.values.address}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="address-input"
                   />
                   {formik.touched.address && formik.errors.address ? (
                     <div className="font-light text-red-600">
@@ -242,6 +247,7 @@ function App() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     required
+                    data-testid="province-select"
                   >
                     {ListOfProvinsi.map((option, index) => (
                       <option key={index} value={option.value}>
@@ -269,6 +275,7 @@ function App() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     required
+                    data-testid="city-select"
                   >
                     {ListOfCity[formik.values.province]?.map((option) => (
                       <option value={option.kota}>{option.kota}</option>
@@ -295,6 +302,7 @@ function App() {
                     value={formik.values.zipcode}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="zipcode-input"
                   />
                   {formik.touched.zipcode && formik.errors.zipcode ? (
                     <div className="font-light text-red-600">
@@ -319,6 +327,7 @@ function App() {
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="username-input"
                   />
                   {formik.touched.username && formik.errors.username ? (
                     <div className="font-light text-red-600">
@@ -339,6 +348,7 @@ function App() {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="password-input"
                   />
                   {formik.touched.password && formik.errors.password ? (
                     <div className="font-light text-red-600">
@@ -360,6 +370,7 @@ function App() {
                     value={formik.values.confirmPassword}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    data-testid="confirmPassword-input"
                   />
                   {formik.touched.confirmPassword &&
                   formik.errors.confirmPassword ? (
@@ -380,15 +391,25 @@ function App() {
                 onClick={back}
                 type="button"
                 disabled={isFirstStep}
+                data-testid="back-button"
               >
                 back
               </button>
               {isLastStep ? (
-                <button className="next-button" type="submit">
+                <button
+                  className="next-button"
+                  type="submit"
+                  data-testid="finish-button"
+                >
                   Finish
                 </button>
               ) : (
-                <button className="next-button" type="button" onClick={next}>
+                <button
+                  className="next-button"
+                  type="button"
+                  onClick={next}
+                  data-testid="next-button"
+                >
                   Next
                 </button>
               )}

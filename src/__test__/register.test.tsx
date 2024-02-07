@@ -5,6 +5,7 @@ import Register from "../pages/register/index";
 import i18next from "../locales/locales";
 import { expect, test } from "vitest";
 import { BrowserRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 const userData = {
   username: "",
@@ -40,7 +41,9 @@ render(
   </BrowserRouter>
 );
 
-test("renders welcome message when user data is present", () => {
-  const greeting = screen.getByTestId(`greeting-user`);
-  expect(greeting.textContent).toEqual(`Welcome ${userData.username}!`);
+test("user input invalid name", async () => {
+  const fullname = screen.getByTestId(`fullname-input`);
+  await userEvent.type(fullname, "ko");
+
+  expect(screen.getByRole("alert")).toBe(true);
 });
