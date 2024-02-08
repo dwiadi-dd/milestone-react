@@ -160,6 +160,7 @@ function App() {
                     <div
                       className="font-light text-red-600"
                       data-testid="error-test"
+                      role="alert"
                     >
                       {formik.errors.fullname}
                     </div>

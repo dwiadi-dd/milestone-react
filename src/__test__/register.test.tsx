@@ -21,7 +21,7 @@ const userData = {
 
 const userDataMock = {
   username: "testuser",
-  fullname: "Test User",
+  fullname: "kocak",
   email: "testuser@example.com",
   dob: "2000-01-01",
   address: "123 Test St",
@@ -43,15 +43,26 @@ render(
 
 test("user input invalid fullname", async () => {
   const fullname = screen.getByTestId(`fullname-input`);
-  userEvent.type(fullname, userDataMock.fullname);
+  await userEvent.type(fullname, "ui");
 
   userEvent.tab();
-  const error = screen.getByTestId(`error-test`);
+  await waitFor(() => {
+    expect(fullname.value).toContain("ui");
 
-  await waitFor(
-    async () => {
-      expect(fullname.textContent).toEqual("Test User");
-    },
-    { timeout: 2000 }
-  );
+    const error = screen.queryByRole(`alert`);
+    expect(error).toBeTruthy();
+  });
+});
+
+test("user input valid fullname", async () => {
+  const fullname = screen.getByTestId(`fullname-input`);
+  await userEvent.type(fullname, userDataMock.fullname);
+
+  userEvent.tab();
+  await waitFor(() => {
+    expect(fullname.value).toContain(userDataMock.fullname);
+
+    const error = screen.queryByRole(`alert`);
+    expect(error).toBeNull();
+  });
 });
