@@ -157,7 +157,10 @@ function App() {
                     data-testid="fullname-input"
                   />
                   {formik.touched.fullname && formik.errors.fullname ? (
-                    <div className="font-light text-red-600">
+                    <div
+                      className="font-light text-red-600"
+                      data-testid="error-test"
+                    >
                       {formik.errors.fullname}
                     </div>
                   ) : (
@@ -179,7 +182,7 @@ function App() {
                     data-testid="email-input"
                   />
                   {formik.touched.email && formik.errors.email ? (
-                    <div className="font-light text-red-600" role="alert">
+                    <div className="font-light text-red-600">
                       {formik.errors.email}
                     </div>
                   ) : (

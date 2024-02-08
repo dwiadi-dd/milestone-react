@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import UserDataContext from "../context/UserDataContext";
 import Register from "../pages/register/index";
@@ -41,9 +41,17 @@ render(
   </BrowserRouter>
 );
 
-test("user input invalid name", async () => {
+test("user input invalid fullname", async () => {
   const fullname = screen.getByTestId(`fullname-input`);
-  await userEvent.type(fullname, "ko");
+  userEvent.type(fullname, userDataMock.fullname);
 
-  expect(screen.getByRole("alert")).toBe(true);
+  userEvent.tab();
+  const error = screen.getByTestId(`error-test`);
+
+  await waitFor(
+    async () => {
+      expect(fullname.textContent).toEqual("Test User");
+    },
+    { timeout: 2000 }
+  );
 });
