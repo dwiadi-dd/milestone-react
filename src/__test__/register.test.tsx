@@ -44,11 +44,10 @@ render(
 test("user input invalid fullname", async () => {
   const fullname = screen.getByTestId(`fullname-input`);
   await userEvent.type(fullname, "ui");
-
   userEvent.tab();
+
   await waitFor(() => {
     expect(fullname.value).toContain("ui");
-
     const error = screen.queryByRole(`alert`);
     expect(error).toBeTruthy();
   });
@@ -57,8 +56,8 @@ test("user input invalid fullname", async () => {
 test("user input valid fullname", async () => {
   const fullname = screen.getByTestId(`fullname-input`);
   await userEvent.type(fullname, userDataMock.fullname);
-
   userEvent.tab();
+
   await waitFor(() => {
     expect(fullname.value).toContain(userDataMock.fullname);
 
