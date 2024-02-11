@@ -25,6 +25,7 @@
   "form.validation.city.required": "City is required",
   "form.validation.province.required": "Province is required",
   "form.validation.address.required": "Address is required",
+  "form.validation.zipcode.format": "invalid zipcode format",
   "form.validation.zipcode.required": "Zipcode is required",
   "form.validation.username.required": "Username is required",
   "form.validation.username.max": "Username maximum length is 15 characters",
@@ -64,5 +65,5 @@
 
   "back": "Back",
   "next": "Next",
-  "finnish": "Finnish"
+  "finnish": "Finish"
 }

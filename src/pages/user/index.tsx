@@ -61,9 +61,9 @@ export default function Welcome() {
               </p>
             </div>
             <div className="justify-evenly flex ">
-              {/* <Link to={"/"}>
+              <Link to={"/register"}>
                 <button className="next-button">{t("user.back")}</button>
-              </Link> */}
+              </Link>
               <button
                 className="next-button text-ellipsis"
                 type="button"

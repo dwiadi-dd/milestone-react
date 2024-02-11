@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { FormStepProps, ListOfCity, ListOfProvinsi } from "../../../../utils";
 
-const AddressInfo = ({ Field, errors, touched, t }: FormStepProps) => {
-  const [provinceSelected, setProvinceSelected] = useState("");
+const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
   return (
     <div>
       <div className="form-group ">
@@ -26,11 +24,11 @@ const AddressInfo = ({ Field, errors, touched, t }: FormStepProps) => {
         <label htmlFor="province" className="label-input">
           {t(`form.province`)}
         </label>
-        <select
+        <Field
+          as="select"
           className="input-form"
           id="province"
           name="province"
-          onChange={(e) => setProvinceSelected(e.target.value)}
           data-testid="province-select"
         >
           <option value="" disabled selected>
@@ -41,7 +39,7 @@ const AddressInfo = ({ Field, errors, touched, t }: FormStepProps) => {
               {option.provinsi}
             </option>
           ))}
-        </select>
+        </Field>
         {touched.province && errors.province ? (
           <div className="font-light text-red-600">{errors.province}</div>
         ) : (
@@ -52,7 +50,8 @@ const AddressInfo = ({ Field, errors, touched, t }: FormStepProps) => {
         <label htmlFor="city" className="label-input">
           {t(`form.city`)}
         </label>
-        <select
+        <Field
+          as="select"
           className="input-form"
           id="city"
           name="city"
@@ -61,12 +60,12 @@ const AddressInfo = ({ Field, errors, touched, t }: FormStepProps) => {
           <option value="" disabled selected>
             {t(`form.cityPlaceholder`)}
           </option>
-          {ListOfCity[provinceSelected]?.map((option) => (
+          {ListOfCity[values.province]?.map((option) => (
             <option key={option.kota} value={option.kota}>
               {option.kota}
             </option>
           ))}
-        </select>
+        </Field>
         <p className="text-red-400">{"\u00A0"}</p>
         {touched.city && errors.city ? (
           <div className="font-light text-red-600">{errors.city}</div>

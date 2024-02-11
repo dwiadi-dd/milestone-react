@@ -11,7 +11,7 @@ const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
           autoFocus
           className="input-form"
           type="text"
-          id="fullanme"
+          id="fullname"
           name="fullname"
           data-testid="fullname-input"
         />
