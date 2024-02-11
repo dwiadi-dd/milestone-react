@@ -1,4 +1,3 @@
-import logo from "../../assets/FA_DIGICAMP_LOGO_WHITE.png";
 import Stepper from "./components/Stepper";
 import FormRegister from "./components/Form";
 import { useStepper } from "../../hooks/useStepper";
@@ -8,15 +7,7 @@ function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col lg:flex-row">
-      <div className="bg-slate-700 w-full lg:w-1/3 text-white shadow-2xl flex flex-col">
-        <header>
-          <img
-            src={logo}
-            alt="logo digicamp"
-            className="lg:w-[200px] w-[10em] pt-4 pl-4"
-          />
-        </header>
-
+      <div className="bg-white w-full lg:w-1/3 text-white shadow-lg flex flex-col">
         <Stepper step={step} />
       </div>
 

@@ -4,13 +4,13 @@
 
 @layer components {
   .stepper {
-    @apply lg:mt-20 lg:ml-4 mx-auto   px-10 pt-10 pb-8;
+    @apply lg:mt-20 lg:ml-4 mx-auto px-10 pt-32 pb-8;
   }
   .stepper-desc {
     @apply mt-2 text-lg font-light tracking-widest;
   }
   .stepper-title {
-    @apply lg:text-4xl text-2xl font-semibold;
+    @apply lg:text-4xl text-2xl font-semibold text-black mb-8;
   }
   .step-form {
     @apply lg:w-3/6 w-3/4 lg:mx-0 mx-auto  lg:pl-[4em];

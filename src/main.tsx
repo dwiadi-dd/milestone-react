@@ -9,6 +9,7 @@ import { RegsiterDataContextType } from "./utils.ts";
 import "./locales/locales.ts";
 import { useTranslation } from "react-i18next";
 import Home from "./pages/homepage/index.tsx";
+import Navbar from "./components/Navbar.tsx";
 
 const Main = () => {
   const { i18n } = useTranslation();
@@ -23,18 +24,9 @@ const Main = () => {
   };
   return (
     <React.StrictMode>
-      <div className="absolute right-4 top-4">
-        <select
-          className="px-4 py-2 rounded-xl cursor-pointer bg-zinc-100"
-          onChange={(e) => changeLanguage(e.target.value)}
-        >
-          <option value="en">🇺🇸 EN</option>
-          <option value="id">🇮🇩 ID</option>
-        </select>
-      </div>
-
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
+          <Navbar changeLanguage={changeLanguage} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<RegisterPge />} />

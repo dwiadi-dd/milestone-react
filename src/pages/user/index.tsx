@@ -3,6 +3,7 @@ import avatar from "../../assets/avatar.svg";
 import UserDataContext from "../../context/UserDataContext";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { ListOfProvinsi } from "../../utils";
 
 export default function Welcome() {
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ export default function Welcome() {
     localStorage.removeItem("userdata");
     navigate("/");
   };
-
+  const provinsi = ListOfProvinsi.find(
+    (prov) => prov.value === userData?.province
+  );
   return (
     <div className=" flex flex-col mx-auto gap-4 justify-center min-h-screen justify-items-center">
       {userData ? (
@@ -56,8 +59,8 @@ export default function Welcome() {
                 {t("user.address")}:
               </p>
               <p className="text-xl font-semibold" data-testid="test-address">
-                {userData.address}, {userData.city}, {userData.province}, {""}
-                {userData.zipcode}. {userData.password}
+                {userData.address}, {userData.city}, {provinsi?.provinsi},{" "}
+                {t(`form.zipcode`)}: {userData.zipcode}.
               </p>
             </div>
             <div className="justify-evenly flex ">

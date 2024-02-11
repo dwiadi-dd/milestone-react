@@ -65,5 +65,9 @@
 
   "back": "Back",
   "next": "Next",
-  "finnish": "Finish"
+  "finnish": "Finish",
+
+  "hero-text": "Welcome to the digicamp page",
+  "hero-greet": "thank you for visiting",
+  "hero-link": "register here"
 }

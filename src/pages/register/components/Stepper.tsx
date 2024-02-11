@@ -5,21 +5,25 @@ const Stepper = ({ step }: { step: number }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="stepper ">
+    <div className="stepper  ">
       <h1 className="stepper-title">Step {step + 1}</h1>
-      <ul className="mt-4 flex lg:flex-col flex-row gap-8 text-slate-400">
+      <ul className="mt-4 flex lg:flex-col flex-row gap-8 text-black">
         {(t("stepList", { returnObjects: true }) as []).map(
           (item: StepListType, i: number) => (
             <li
               key={item.id}
               className="step-list"
-              style={step >= i ? { color: "white" } : { color: "#64748b" }}
+              style={
+                step >= i
+                  ? { color: "#000", fontWeight: "bold" }
+                  : { color: "#64748b" }
+              }
             >
               <p
                 className=" step-number-actived"
                 style={
                   step >= i
-                    ? { borderColor: "white" }
+                    ? { borderColor: "#000" }
                     : { borderColor: "#64748b" }
                 }
               >
