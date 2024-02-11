@@ -11,8 +11,8 @@
   "form.province": "Province",
   "form.address": "Address",
   "form.zipcode": "Zipcode",
-  "form.cityplaceholder": "Enter your city",
-  "form.provinceplaceholder": "Enter your province",
+  "form.cityPlaceholder": "Select your City",
+  "form.provincePlaceholder": "Select your Province",
   "form.dob": "Date of Birth",
 
   "form.validation.fullname.required": "Full name is required",
@@ -60,5 +60,9 @@
   "user.dob": "Date of Birth",
   "user.address": "Address",
   "user.back": "Back",
-  "user.clear": "Clear Data"
+  "user.clear": "Clear Data",
+
+  "back": "Back",
+  "next": "Next",
+  "finnish": "Finnish"
 }

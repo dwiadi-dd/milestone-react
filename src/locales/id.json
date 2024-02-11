@@ -61,5 +61,8 @@
   "user.email": "Surel",
   "user.address": "Alamat",
   "user.back": "Kembali",
-  "user.clear": "Hapus Akun"
+  "user.clear": "Hapus Akun",
+  "back": "Kembali",
+  "next": "Lanjut",
+  "finnish": "Selesai"
 }

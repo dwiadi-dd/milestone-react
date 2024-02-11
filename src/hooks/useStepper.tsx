@@ -4,21 +4,21 @@ export function useStepper(steps: Array<React.ReactNode>) {
   const [step, setStep] = useState(0);
 
   const next = () => {
+    console.log("next");
+
     setStep((prevStep) => {
-      if (prevStep >= steps.length - 1) return prevStep;
+      if (prevStep >= 2) return prevStep;
       return prevStep + 1;
     });
   };
 
   const prev = () => {
-    setStep((prevStep) => {
-      if (step <= 0) return prevStep;
-      return prevStep - 1;
-    });
-  };
+    console.log("back");
 
-  const goto = (n: number) => {
-    setStep(n);
+    setStep((i) => {
+      if (i <= 0) return i;
+      return i - 1;
+    });
   };
 
   return {
@@ -26,6 +26,5 @@ export function useStepper(steps: Array<React.ReactNode>) {
     currentForm: steps[step],
     next,
     prev,
-    goto,
   };
 }

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { StepListType } from "../utils";
+import { StepListType } from "../../../utils";
 
 const Stepper = ({ step }: { step: number }) => {
   const { t } = useTranslation();

@@ -1,3 +1,24 @@
+import { TFunction } from "i18next";
+
+export const validateStep = (step: number, errors: any) => {
+  if (step === 0) {
+    if (errors.fullname || errors.email || errors.dob) return false;
+    return true;
+  }
+  if (step === 1) {
+    if (errors.address || errors.zipcode || errors.city || errors.province)
+      return false;
+    return true;
+  }
+  if (step === 2) {
+    if (errors.username || errors.password || errors.confirmPassword)
+      return false;
+    return true;
+  }
+  return true;
+};
+export const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+
 export interface StepListType {
   id: number;
   title: string;
@@ -32,9 +53,30 @@ export interface RegsiterDataContextType {
   username: string;
   password: string;
 }
+export interface FormikDataInterface {
+  fullname: string;
+  email: string;
+  dob: string;
+  address: string;
+  zipcode: string;
+  city: string;
+  province: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export interface RegsiterDataTypeObject {
   registerData: RegsiterDataContextType;
+}
+
+export interface FormStepProps {
+  Field: any;
+  values: any;
+  touched: any;
+  errors: any;
+  ErrorMessage: any;
+  t: TFunction;
 }
 
 interface City {

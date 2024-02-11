@@ -8,6 +8,7 @@ import UserDataContext from "./context/UserDataContext";
 import { RegsiterDataContextType } from "./utils.ts";
 import "./locales/locales.ts";
 import { useTranslation } from "react-i18next";
+import Home from "./pages/homepage/index.tsx";
 
 const Main = () => {
   const { i18n } = useTranslation();
@@ -35,7 +36,8 @@ const Main = () => {
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
           <Routes>
-            <Route path="/" element={<RegisterPge />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<RegisterPge />} />
             <Route path="/user" element={<UserPage />} />
           </Routes>
         </UserDataContext.Provider>

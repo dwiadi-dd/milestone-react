@@ -60,10 +60,10 @@ export default function Welcome() {
                 {userData.zipcode}. {userData.password}
               </p>
             </div>
-            <div className="justify-evenly flex border-2 border-sky-400">
-              <Link to={"/"}>
+            <div className="justify-evenly flex ">
+              {/* <Link to={"/"}>
                 <button className="next-button">{t("user.back")}</button>
-              </Link>
+              </Link> */}
               <button
                 className="next-button text-ellipsis"
                 type="button"
