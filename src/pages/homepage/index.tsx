@@ -8,16 +8,16 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col items-center justify-center h-[100vh] bg-slate-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-stone-100">
       <h1 className="text-4xl font-bold mb-4">
-        <span className="font-['Orbitron']">{t("hero-text")}</span>
+        <span className="font-theme">{t("hero-text")}</span>
       </h1>
       <p className="text-lg text-gray-600"> {t("hero-greet")}</p>
       {userData ? (
         <p>
-          hello {userData.fullname},{" "}
+          {t("user.greeting")}
           <Link to={"/user"} className="font-semibold">
-            profile
+            {userData.fullname}{" "}
           </Link>
         </p>
       ) : (

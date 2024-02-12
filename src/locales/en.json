@@ -55,19 +55,21 @@
       "desc": "please provide your personal information"
     }
   ],
-  "user.greeting": "Welcome, {name}!",
+  "user.greeting": "Hello, ",
   "user.name": "Name",
-  "user.email": "Surel",
+  "user.email": "Email",
   "user.dob": "Date of Birth",
   "user.address": "Address",
   "user.back": "Back",
   "user.clear": "Clear Data",
 
   "back": "Back",
+  "edit": "edit data",
+
   "next": "Next",
   "finnish": "Finish",
 
-  "hero-text": "Welcome to the digicamp page",
-  "hero-greet": "thank you for visiting",
+  "hero-text": "Welcome to the digiWish",
+  "hero-greet": "write your wish, be calm and let god do the rest..",
   "hero-link": "register here"
 }

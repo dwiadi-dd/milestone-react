@@ -3,7 +3,7 @@
   "registerLink": "klik ini untuk mendaftar",
 
   "form.fullname": "Nama Lengkap",
-  "form.email": "Surel",
+  "form.email": "Alamat Email",
   "form.password": "Kata Sandi",
   "form.confirmPassword": "Konfirmasi Kata Sandi",
   "form.submit": "Daftar",
@@ -56,18 +56,19 @@
     }
   ],
 
-  "user.greeting": "Selamat datang, {name}!",
+  "user.greeting": "Halo, ",
   "user.name": "Nama",
   "user.dob": "Tanggal Lahir",
-  "user.email": "Surel",
+  "user.email": "Alamat Email",
   "user.address": "Alamat",
   "user.back": "Kembali",
   "user.clear": "Hapus Akun",
   "back": "Kembali",
+  "edit": "ubah data",
   "next": "Lanjut",
   "finnish": "Selesai",
 
-  "hero-text": "masa muda masa yang berapi-api 🔥🔥",
-  "hero-greet": "terimakasih sudah mengunjungi web kami",
+  "hero-text": "selamat datang, selamat bermimpi!",
+  "hero-greet": "ngewish aja dulu..",
   "hero-link": "daftar disini"
 }

@@ -10,6 +10,7 @@ import "./locales/locales.ts";
 import { useTranslation } from "react-i18next";
 import Home from "./pages/homepage/index.tsx";
 import Navbar from "./components/Navbar.tsx";
+import LoginPage from "./pages/signin/index.tsx";
 
 const Main = () => {
   const { i18n } = useTranslation();
@@ -29,6 +30,7 @@ const Main = () => {
           <Navbar changeLanguage={changeLanguage} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPge />} />
             <Route path="/user" element={<UserPage />} />
           </Routes>

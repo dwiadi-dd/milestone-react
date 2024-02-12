@@ -8,7 +8,9 @@ const Navbar = ({
   return (
     <nav className="flex px-10 absolute pt-8  justify-between w-screen bg-white py-4 shadow-sm">
       <Link to={"/"}>
-        <h1 className="font-['Orbitron'] text-2xl font-semibold ">digiCamp</h1>
+        <h1 className="font-theme text-2xl font-bold text-amber-600 ">
+          digiWish
+        </h1>
       </Link>
       <div>
         <select

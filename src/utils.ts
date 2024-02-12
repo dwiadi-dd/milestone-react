@@ -1,29 +1,32 @@
+import { FieldProps, FormikErrors, FormikTouched } from "formik";
 import { TFunction } from "i18next";
 
-export const validateStep = (step: number, errors: any) => {
-  if (step === 0) {
-    if (errors.fullname || errors.email || errors.dob) return false;
-    return true;
-  }
-  if (step === 1) {
-    if (errors.address || errors.zipcode || errors.city || errors.province)
-      return false;
-    return true;
-  }
-  if (step === 2) {
-    if (errors.username || errors.password || errors.confirmPassword)
-      return false;
-    return true;
-  }
-  return true;
-};
 export const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+
+export enum WishStatus {
+  Pending,
+  Bought,
+  Cancelled,
+  MAHAL,
+}
+
+export interface WishItemType {
+  id: number;
+  name: string;
+  url: string;
+  price: number;
+  status: WishStatus;
+}
 
 export interface StepListType {
   id: number;
   title: string;
   alt: string;
   desc: string;
+}
+
+export interface DigiWishDataType {
+  userList: RegsiterDataType[];
 }
 
 export interface StepListTypeObject {
@@ -53,6 +56,7 @@ export interface RegsiterDataContextType {
   username: string;
   password: string;
 }
+
 export interface FormikDataInterface {
   fullname: string;
   email: string;
@@ -70,12 +74,12 @@ export interface RegsiterDataTypeObject {
   registerData: RegsiterDataContextType;
 }
 
-export interface FormStepProps {
-  Field: any;
-  values: any;
-  touched: any;
-  errors: any;
-  ErrorMessage: any;
+export interface FormStepProps<Values> {
+  Field: string | React.ComponentType<FieldProps["field"]>;
+  values: Values;
+  touched: FormikTouched<Values>;
+  errors: FormikErrors<Values>;
+  ErrorMessage: string | React.ComponentType<FieldProps>;
   t: TFunction;
 }
 
