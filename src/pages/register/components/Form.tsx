@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import PersonalInfo from "./steps/PersonalInfo";
 import AddressInfo from "./steps/AddressInfo";
 import AccountData from "./steps/AccountData";
+import bcrypt from "bcryptjs";
 import { passwordRules } from "../../../utils";
 
 function FormRegister({
@@ -85,8 +86,12 @@ function FormRegister({
           onSubmit={(values) => {
             console.log(values);
             if (step !== 2) return next();
+            values.password = bcrypt.hashSync(values.password, 10);
             setUserData(values);
-            localStorage.setItem("userdata", JSON.stringify(values));
+            const userdb = JSON.parse(localStorage.getItem("userdb"));
+            userdb?.push(values);
+            localStorage.setItem("userdb", JSON.stringify(userdb));
+            localStorage.setItem("userlogged", JSON.stringify(values));
             navigate("/user");
           }}
         >

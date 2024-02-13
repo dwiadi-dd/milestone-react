@@ -1,18 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import avatar from "../../assets/avatar.svg";
 import UserDataContext from "../../context/UserDataContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ListOfProvinsi } from "../../utils";
 
 export default function Welcome() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [, setUserData] = useContext(UserDataContext);
 
   const [userData] = useContext(UserDataContext);
+  useEffect(() => {}, [userData]);
   const removeData = () => {
-    localStorage.removeItem("userdata");
-    navigate("/");
+    localStorage.removeItem("userlogged");
+    setUserData({
+      fullname: "",
+      email: "",
+      dob: "",
+      address: "",
+      zipcode: "",
+      city: "",
+      province: "",
+      username: "",
+      password: "",
+    });
+    window.location.href = "/";
   };
   const provinsi = ListOfProvinsi.find(
     (prov) => prov.value === userData?.province

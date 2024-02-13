@@ -15,8 +15,8 @@ import LoginPage from "./pages/signin/index.tsx";
 const Main = () => {
   const { i18n } = useTranslation();
   const userData = useState(
-    localStorage.getItem("userdata")
-      ? JSON.parse(localStorage.getItem("userdata") as string)
+    localStorage.getItem("userlogged")
+      ? JSON.parse(localStorage.getItem("userlogged") as string)
       : (null as RegsiterDataContextType | null)
   );
 

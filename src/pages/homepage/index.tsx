@@ -21,11 +21,19 @@ export default function Home() {
           </Link>
         </p>
       ) : (
-        <p>
-          <Link to={"/register"} className="font-semibold">
-            {t("hero-link")}
-          </Link>
-        </p>
+        <div className="flex">
+          <p>
+            <Link to={"/signin"} className="font-semibold">
+              signin
+            </Link>
+          </p>{" "}
+          /{" "}
+          <p>
+            <Link to={"/register"} className="font-semibold">
+              {t("hero-link")}
+            </Link>
+          </p>
+        </div>
       )}
     </div>
   );
