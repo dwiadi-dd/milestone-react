@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import { FormStepProps, ListOfCity, ListOfProvinsi } from "../../../../utils";
 
 const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
@@ -14,11 +15,7 @@ const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
           name="address"
           data-testid="address-input"
         />
-        {touched.address && errors.address ? (
-          <div className="font-light text-red-600">{errors.address}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage name="address" component="div" className="text-red-600" />
       </div>
       <div className="form-group">
         <label htmlFor="province" className="label-input">
@@ -40,11 +37,11 @@ const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
             </option>
           ))}
         </Field>
-        {touched.province && errors.province ? (
-          <div className="font-light text-red-600">{errors.province}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage
+          name="province"
+          component="div"
+          className="text-red-600"
+        />
       </div>
       <div className="form-group">
         <label htmlFor="city" className="label-input">
@@ -67,11 +64,7 @@ const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
           ))}
         </Field>
         <p className="text-red-400">{"\u00A0"}</p>
-        {touched.city && errors.city ? (
-          <div className="font-light text-red-600">{errors.city}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage name="city" component="div" className="text-red-600" />
       </div>
       <div className="form-group ">
         <label htmlFor="zipcode" className="label-input">
@@ -83,12 +76,9 @@ const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
           id="zipcode"
           name="zipcode"
           data-testid="zipcode-input"
+          error={touched.zipcode && errors.zipcode}
         />
-        {touched.zipcode && errors.zipcode ? (
-          <div className="font-light text-red-600">{errors.zipcode}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage name="zipcode" component="div" className="text-red-600" />
       </div>
     </div>
   );

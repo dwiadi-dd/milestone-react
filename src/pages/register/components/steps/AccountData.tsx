@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import { FormStepProps } from "../../../../utils";
 
 const AccountData = ({ Field, errors, touched, t }: FormStepProps) => {
@@ -14,11 +15,11 @@ const AccountData = ({ Field, errors, touched, t }: FormStepProps) => {
           name="username"
           data-testid="username-input"
         />
-        {touched.username && errors.username ? (
-          <div className="font-light text-red-600">{errors.username}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage
+          name="username"
+          component="div"
+          className="text-red-600"
+        />
       </div>
       <div className="form-group">
         <label htmlFor="password" className="label-input">
@@ -31,11 +32,11 @@ const AccountData = ({ Field, errors, touched, t }: FormStepProps) => {
           name="password"
           data-testid="password-input"
         />
-        {touched.password && errors.password ? (
-          <div className="font-light text-red-600">{errors.password}</div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage
+          name="password"
+          component="div"
+          className="text-red-600"
+        />
       </div>
       <div className="form-group">
         <label htmlFor="confirmPassword" className="label-input">
@@ -45,16 +46,15 @@ const AccountData = ({ Field, errors, touched, t }: FormStepProps) => {
           className="input-form"
           type="password"
           id="confirmPassword"
+          validateOnChange={true}
           name="confirmPassword"
           data-testid="confirmPassword-input"
         />
-        {touched.confirmPassword && errors.confirmPassword ? (
-          <div className="font-light text-red-600">
-            {errors.confirmPassword}
-          </div>
-        ) : (
-          <div>{"\u00A0"}</div>
-        )}
+        <ErrorMessage
+          name="confirmPassword"
+          component="div"
+          className="text-red-600"
+        />
       </div>
     </div>
   );

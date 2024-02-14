@@ -43,7 +43,14 @@ export interface RegsiterDataType {
   province: string;
   username: string | null;
   password: string | null;
+  wishlist: WishItemType[];
 }
+export const rupiah = (balance: number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "idr",
+  }).format(balance);
+};
 
 export interface RegsiterDataContextType {
   fullname: string;
@@ -55,6 +62,7 @@ export interface RegsiterDataContextType {
   province: string;
   username: string;
   password: string;
+  wishlist: WishItemType[];
 }
 
 export interface FormikDataInterface {

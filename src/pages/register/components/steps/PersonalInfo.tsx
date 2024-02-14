@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import { FormStepProps } from "../../../../utils";
 
 const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
@@ -42,7 +43,7 @@ const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
           <div className="font-light text-red-600">{errors.email}</div>
         ) : (
           <div>{"\u00A0"}</div>
-        )}
+        )}{" "}
       </div>
       <div className="form-group">
         <label htmlFor="dob" className="label-input">
@@ -60,7 +61,7 @@ const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
           <div className="font-light text-red-600">{errors.dob}</div>
         ) : (
           <div>{"\u00A0"}</div>
-        )}
+        )}{" "}
       </div>
     </div>
   );

@@ -1,40 +1,30 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import avatar from "../../assets/avatar.svg";
 import UserDataContext from "../../context/UserDataContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ListOfProvinsi } from "../../utils";
+import { ListOfProvinsi, rupiah } from "../../utils";
+import WishForm from "./components/WishForm";
 
 export default function Welcome() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { t } = useTranslation();
-  const [, setUserData] = useContext(UserDataContext);
-
+  const [addData, setAddData] = useState(false);
   const [userData] = useContext(UserDataContext);
   useEffect(() => {}, [userData]);
   const removeData = () => {
     localStorage.removeItem("userlogged");
-    setUserData({
-      fullname: "",
-      email: "",
-      dob: "",
-      address: "",
-      zipcode: "",
-      city: "",
-      province: "",
-      username: "",
-      password: "",
-    });
+
     window.location.href = "/";
   };
   const provinsi = ListOfProvinsi.find(
     (prov) => prov.value === userData?.province
   );
   return (
-    <div className=" flex flex-col mx-auto  gap-4 justify-center min-h-screen justify-items-center bg-stone-100 px-20 ">
+    <div className=" flex flex-col gap-4  h-screen  bg-stone-100 px-20 ">
       {userData ? (
         <div className="flex gap-4 mt-8">
-          <div className="bg-white rounded-xl p-8 w-1/4">
+          <div className="bg-white rounded-2xl p-8 w-1/4 border-2 border-black border-b-[14px] border-r-4">
             <h1
               className="text-center text-2xl font-semibold tracking-widest font-theme"
               data-testid="greeting-user"
@@ -80,7 +70,7 @@ export default function Welcome() {
                   {t("user.address")}:
                 </p>
                 <p
-                  className="text-xl font-semibold text-wrap"
+                  className="text-base font-semibold text-wrap"
                   data-testid="test-address"
                 >
                   {userData.address}, <br />
@@ -89,11 +79,8 @@ export default function Welcome() {
                 </p>
               </div>
               <div className="flex justify-around items-center ">
-                <Link to={"/register"}>
-                  <button className="back-button">{t("edit")}</button>
-                </Link>
                 <button
-                  className="next-button text-ellipsis"
+                  className="next-button text-ellipsis bg-red-600 hover:bg-red-900"
                   type="button"
                   onClick={removeData}
                 >
@@ -102,24 +89,45 @@ export default function Welcome() {
               </div>
             </div>
           </div>
-          <div className="bg-white p-8 rounded-xl w-3/4">
-            <table className="w-full ">
-              <tr className="border-2">
-                <th className="border-2">No</th>
-                <th className="border-2">Item name</th>
-                <th className="border-2">Url</th>
-                <th className="border-2">Estimated price</th>
-                <th className="border-2">Status</th>
-              </tr>
+          <div className="bg-white p-8 rounded-3xl shadow-xl overflow-scroll h-[75vh] w-3/4 border-2 border-black border-b-[14px] border-r-4">
+            <button
+              className="text-green-500 float-end font-semibold transition ease-in-out  hover:scale-[1.1] hover:text-green-400  font-theme  mb-10"
+              type="button"
+              onClick={() => setAddData(!addData)}
+            >
+              {!addData ? "+ add item" : "close form"}
+            </button>
+            <div className="flex">{addData && <WishForm />}</div>
+            <table className="w-full   border-separate">
               <tr>
-                <td className="border-2 p-2">1</td>
-                <td className="border-2 p-2">Iphone 18</td>
-                <td className="border-2 p-2">iBox</td>
-                <td className="border-2 p-2">RP. 5.000.000</td>
-                <td className="border-2 p-2">
-                  <span className="p-2 bg-sky-200 rounded-lg">Pending</span>
-                </td>
+                <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
+                  No
+                </th>
+                <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
+                  Item name
+                </th>
+                <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
+                  Url
+                </th>
+                <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
+                  Estimated price
+                </th>
+                <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
+                  Status
+                </th>
               </tr>
+              {userData.wishlist?.map((data, i) => (
+                <tr>
+                  <td className="p-4 font-bold text-center ">{i + 1}</td>
+                  <td className="p-4 font-bold">{data.name}</td>
+                  <td className="p-4 text-sky-400 font-semibold">
+                    <a href={data.url}>url</a>
+                  </td>
+                  <td className="p-4 font-bold">{rupiah(data.price)}</td>
+                  <td className="p-4 text-center  font-bold">{data.status}</td>
+                </tr>
+              ))}
+              {userData.wishlist.length === 0 && <p>no data yet</p>}
             </table>
           </div>
         </div>

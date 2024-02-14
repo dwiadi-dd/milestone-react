@@ -4,7 +4,7 @@
 
 @layer components {
   .stepper {
-    @apply lg:mt-20 lg:ml-4 mx-auto px-10 pt-32 pb-8;
+    @apply lg:mt-20 lg:ml-4 mx-auto px-10 pt-10 pb-8;
   }
   .stepper-desc {
     @apply mt-2 text-lg font-light tracking-widest;
@@ -37,13 +37,13 @@
     @apply flex flex-col gap-3;
   }
   .next-button {
-    @apply py-2 px-6 bg-amber-500 hover:bg-amber-700 text-white rounded-xl transition ease-in-out w-[150px];
+    @apply py-2 pb-[14px] px-6 bg-green-500 hover:bg-green-700 hover:scale-[1.1] font-semibold font-theme text-white rounded-xl transition ease-in-out w-[150px] border-2 border-black border-b-8 border-r-4;
   }
   .back-button {
     @apply text-slate-400 hover:text-slate-300 font-semibold transition ease-in-out  disabled:pointer-events-none;
   }
   .input-form {
-    @apply border-2 border-slate-200 text-xl py-2 px-4 rounded-lg outline-none;
+    @apply border-2 border-black border-b-[8px] border-r-4 text-xl py-2 px-4 rounded-xl outline-none;
   }
   .button-form-group {
     @apply flex flex-row justify-evenly text-xl lg:pt-4 pt-0;

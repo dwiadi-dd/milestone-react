@@ -11,9 +11,13 @@ import { useTranslation } from "react-i18next";
 import Home from "./pages/homepage/index.tsx";
 import Navbar from "./components/Navbar.tsx";
 import LoginPage from "./pages/signin/index.tsx";
+import PrivateRoutes from "./utils/PrivateRoutes.tsx";
 
 const Main = () => {
   const { i18n } = useTranslation();
+  if (!localStorage.getItem("userdb")) {
+    localStorage.setItem("userdb", JSON.stringify([]));
+  }
   const userData = useState(
     localStorage.getItem("userlogged")
       ? JSON.parse(localStorage.getItem("userlogged") as string)
@@ -27,13 +31,17 @@ const Main = () => {
     <React.StrictMode>
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
-          <Navbar changeLanguage={changeLanguage} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPge />} />
-            <Route path="/user" element={<UserPage />} />
-          </Routes>
+          <div className="bg-amber-100 h-screen">
+            <Navbar changeLanguage={changeLanguage} />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signin" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPge />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/user" element={<UserPage />} />
+              </Route>
+            </Routes>
+          </div>
         </UserDataContext.Provider>
       </BrowserRouter>
     </React.StrictMode>

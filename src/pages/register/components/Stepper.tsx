@@ -5,7 +5,7 @@ const Stepper = ({ step }: { step: number }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="stepper  ">
+    <div className="stepper">
       <h1 className="stepper-title">Step {step + 1}</h1>
       <ul className="mt-4 flex lg:flex-col flex-row gap-8 text-black">
         {(t("stepList", { returnObjects: true }) as []).map(

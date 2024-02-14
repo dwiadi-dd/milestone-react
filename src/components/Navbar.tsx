@@ -1,18 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const Navbar = ({
   changeLanguage,
 }: {
   changeLanguage: (value: string) => void;
 }) => {
+  const { isAuth } = useAuth();
   return (
-    <nav className="flex px-10 absolute pt-8  justify-between w-screen bg-white py-4 shadow-sm">
+    <nav className="flex px-10 pt-8 justify-between w-screen bg-white py-4 shadow-sm border-b-2 border-slate-300">
       <Link to={"/"}>
-        <h1 className="font-theme text-2xl font-bold text-amber-600 ">
+        <h1 className="font-theme text-2xl font-bold text-green-600 ">
           digiWish
         </h1>
       </Link>
-      <div>
+      <div className="flex items-center gap-5">
+        <div className="font-semibold hover:opacity-80 flex gap-4">
+          {isAuth() ? (
+            <NavLink to={"/user"}>Dashboard</NavLink>
+          ) : (
+            <>
+              <NavLink to={"/signin"}>Login</NavLink>
+              <NavLink to={"/register"}>Register</NavLink>
+            </>
+          )}
+        </div>
         <select
           className=" bg-zinc-100 rounded-xl w-20 px-4 py-2  cursor-pointer focus:outline-none"
           onChange={(e) => changeLanguage(e.target.value)}

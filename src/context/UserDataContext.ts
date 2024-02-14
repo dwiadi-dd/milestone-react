@@ -17,6 +17,7 @@ const UserDataContext = createContext<
     province: "",
     username: "",
     password: "",
+    wishlist: [],
   },
   () => {},
 ]);

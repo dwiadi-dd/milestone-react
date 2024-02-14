@@ -45,7 +45,7 @@ function FormRegister({
         .max(5, t(`form.validation.zipcode.format`)),
       city: Yup.string().required(t(`form.validation.city.required`)),
       province: Yup.string().required(t(`form.validation.province.required`)),
-    }),
+    }).strict(),
     Yup.object({
       username: Yup.string()
         .required(t(`form.validation.username.required`))
@@ -79,16 +79,23 @@ function FormRegister({
             city: userData?.city || "",
             province: userData?.province || "",
             username: userData?.username || "",
-            password: userData?.password || "",
+            password: "",
             confirmPassword: "",
+            wishlist: [],
           }}
           validationSchema={validationSchemas[step]}
+          validateOnMount={false}
           onSubmit={(values) => {
             console.log(values);
             if (step !== 2) return next();
             values.password = bcrypt.hashSync(values.password, 10);
+            values.confirmPassword = bcrypt.hashSync(
+              values.confirmPassword,
+              10
+            );
             setUserData(values);
-            const userdb = JSON.parse(localStorage.getItem("userdb"));
+
+            const userdb = JSON.parse(localStorage.getItem("userdb") as string);
             userdb?.push(values);
             localStorage.setItem("userdb", JSON.stringify(userdb));
             localStorage.setItem("userlogged", JSON.stringify(values));
@@ -130,6 +137,7 @@ function FormRegister({
                   className="back-button"
                   onClick={prev}
                   type="button"
+                  tabIndex={-1}
                   disabled={isFirstStep}
                   data-testid="back-button"
                 >

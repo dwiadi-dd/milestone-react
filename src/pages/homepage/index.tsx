@@ -8,7 +8,7 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-stone-100">
+    <div className="flex flex-col items-center justify-center h-[90vh] bg-stone-100">
       <h1 className="text-4xl font-bold mb-4">
         <span className="font-theme">{t("hero-text")}</span>
       </h1>
