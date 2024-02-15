@@ -30,7 +30,7 @@ render(
   </BrowserRouter>
 );
 
-test("user input valid email", async () => {
+test("user can input  email", async () => {
   const email = screen.getByTestId(`email-test`) as HTMLInputElement;
   await userEvent.type(email, userData.email);
   userEvent.tab();
@@ -40,7 +40,7 @@ test("user input valid email", async () => {
   });
 });
 
-test("user input valid password", async () => {
+test("user can input password", async () => {
   const password = screen.getByTestId(`password-test`) as HTMLInputElement;
   await userEvent.type(password, userData.password);
   userEvent.tab();
@@ -48,4 +48,9 @@ test("user input valid password", async () => {
   await waitFor(() => {
     expect(password.value).toContain(userData.password);
   });
+});
+
+test("user click login button", async () => {
+  const login = screen.getByTestId(`login-test`);
+  await login.click();
 });
