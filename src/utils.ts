@@ -49,12 +49,6 @@ export interface UserDataType {
   password: string;
   wishlist: WishItemType[];
 }
-export const rupiah = (balance: number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "idr",
-  }).format(balance);
-};
 
 export interface RegsiterDataContextType {
   fullname: string;
@@ -117,6 +111,12 @@ export const priorDate = new Date(
   new Date().setFullYear(today.getFullYear() - 18)
 );
 
+export const rupiah = (balance: number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "idr",
+  }).format(balance);
+};
 export const stepList = [
   {
     id: 1,

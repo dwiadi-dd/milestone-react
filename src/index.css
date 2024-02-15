@@ -10,7 +10,7 @@
     @apply mt-2 text-lg font-light tracking-widest;
   }
   .stepper-title {
-    @apply lg:text-4xl text-2xl font-semibold text-black mb-8;
+    @apply lg:text-4xl text-2xl font-semibold text-black mb-8 font-theme;
   }
   .step-form {
     @apply lg:w-3/6 w-3/4 lg:mx-0 mx-auto  lg:pl-[4em];
@@ -28,17 +28,21 @@
     @apply text-slate-100;
   }
   .form-title {
-    @apply text-4xl font-bold capitalize;
+    @apply text-4xl font-bold capitalize font-theme;
   }
   .form-desc {
     @apply text-xl font-normal tracking-wide text-slate-400;
   }
   .form-group {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3 font-theme;
   }
   .next-button {
-    @apply py-2 pb-[14px] px-6 bg-green-500 hover:bg-green-700 hover:scale-[1.1] font-semibold font-theme text-white rounded-xl transition ease-in-out w-[150px] border-2 border-black border-b-8 border-r-4;
+    @apply py-2 pb-[14px] px-6 bg-white text-black hover:bg-green-500 hover:text-white hover:scale-[1.1] font-semibold font-theme  rounded-xl transition ease-in-out w-[150px] border-2 border-black border-b-8 border-r-4;
   }
+  .logout-button {
+    @apply py-2 pb-[14px] px-6 bg-white text-black hover:bg-red-600 hover:text-white hover:scale-[1.1] font-semibold font-theme  rounded-xl transition ease-in-out w-[150px] border-2 border-black border-b-8 border-r-4;
+  }
+
   .back-button {
     @apply text-slate-400 hover:text-slate-300 font-semibold transition ease-in-out  disabled:pointer-events-none;
   }
@@ -52,19 +56,19 @@
     @apply text-xl capitalize text-slate-500 tracking-wide;
   }
   .table-th {
-    @apply p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl;
+    @apply p-4 border-2 bg-slate-200 font-theme capitalize  border-r-4 border-b-8 border-black rounded-xl;
   }
   .add-button {
-    @apply text-green-500  lg:float-end font-semibold transition ease-in-out  hover:scale-[1.1] hover:text-green-400  font-theme  mb-10;
+    @apply text-slate-500  lg:float-end font-extrabold transition ease-in-out  hover:scale-[1.1] hover:text-green-400  font-theme  mb-10;
   }
   .remove-button {
-    @apply px-4 py-2 rounded-xl border-2 border-black border-b-4 hover:bg-red-500 hover:text-white hover:scale-[1.1] transition ease-in-out;
+    @apply px-4 py-2 rounded-xl border-2 border-black border-b-4 hover:bg-red-500 hover:text-white hover:scale-[1.1] transition ease-in-out font-theme;
   }
   .dashboard-section {
     @apply bg-white p-8 rounded-2xl shadow-xl overflow-y-hidden lg:overflow-scroll min-h-[50vh]  lg:h-[75vh] lg:w-3/4  w-full border-2 border-black border-b-[14px] border-r-4;
   }
   .user-page {
-    @apply flex flex-col gap-4 min-h-[93vh] bg-green-100  px-4 md:px-10 lg:px-20;
+    @apply flex flex-col gap-4 min-h-[93vh] bg-slate-100  px-4 md:px-10 lg:px-20;
   }
   .main-user-page {
     @apply flex flex-col lg:flex-row gap-4 mt-8;
@@ -91,7 +95,7 @@
     @apply w-[350px] lg:w-1/4 p-6 py-10 bg-white rounded-xl;
   }
   .login-title {
-    @apply text-4xl font-theme mb-6 text-center font-bold text-green-500;
+    @apply text-4xl font-theme mb-6 text-center font-bold text-slate-500;
   }
   .regis-container {
     @apply flex flex-col lg:pt-32 pt-12 w-full;

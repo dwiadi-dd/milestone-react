@@ -3,8 +3,9 @@ import FormRegister from "./components/Form";
 import { useStepper } from "../../hooks/useStepper";
 import { useAuth } from "../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
+import React from "react";
 
-function RegisterPage() {
+const RegisterPage: React.FC = () => {
   const { step, next, prev } = useStepper(["0", "1", "2"]);
   const { isAuth } = useAuth();
   if (isAuth()) {
@@ -19,6 +20,6 @@ function RegisterPage() {
       <FormRegister step={step} next={next} prev={prev} />
     </div>
   );
-}
+};
 
 export default RegisterPage;

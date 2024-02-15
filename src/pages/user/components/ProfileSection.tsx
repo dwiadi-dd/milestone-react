@@ -51,7 +51,7 @@ const ProfileSection = ({ userData }: { userData: RegsiterDataType }) => {
         </div>
         <div className="flex justify-around items-center ">
           <button
-            className="next-button text-ellipsis bg-red-600 hover:bg-red-900"
+            className="logout-button"
             type="button"
             data-testid="logout-button"
             onClick={removeData}

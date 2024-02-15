@@ -10,9 +10,7 @@ const Navbar = ({
   return (
     <nav className="flex px-10 pt-8 justify-between w-screen bg-white py-4 shadow-sm border-b-2 border-slate-300">
       <Link to={"/"}>
-        <h1 className="font-theme text-2xl font-bold text-green-600 ">
-          digiWish
-        </h1>
+        <h1 className="font-theme text-2xl font-bold text-black ">digiWish</h1>
       </Link>
       <div className="flex items-center gap-5">
         <div className="font-semibold hover:opacity-80 flex gap-4">

@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import UserDataContext from "../../context/UserDataContext";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export default function Home() {
+const Home: React.FC = () => {
   const [userData] = useContext(UserDataContext);
   const { t } = useTranslation();
 
@@ -37,4 +37,5 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+export default Home;

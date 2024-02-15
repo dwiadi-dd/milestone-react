@@ -1,13 +1,13 @@
 import { Navigate } from "react-router-dom";
 import UserDataContext from "../../context/UserDataContext";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RegsiterDataType, WishItemType, rupiah } from "../../utils";
 import WishForm from "./components/WishForm";
 import { useAuth } from "../../hooks/useAuth";
 import ProfileSection from "./components/ProfileSection";
 
-const Welcome = () => {
+const Welcome: React.FC = () => {
   const { t } = useTranslation();
   const [addData, setAddData] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

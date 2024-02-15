@@ -31,7 +31,7 @@ const Main = () => {
     <React.StrictMode>
       <BrowserRouter>
         <UserDataContext.Provider value={userData}>
-          <div className="bg-amber-100 h-screen">
+          <div className="bg-slate-100 h-screen">
             <Navbar changeLanguage={changeLanguage} />
             <Routes>
               <Route path="/" element={<Home />} />
