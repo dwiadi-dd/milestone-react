@@ -28,7 +28,7 @@ const userDataMock = {
   city: "Kabupaten Bandung",
   province: "jabar",
   zipcode: "12345",
-  password: "12345",
+  password: "Kocak12345",
   wishlist: [],
 };
 
@@ -100,7 +100,42 @@ test("user select valid city", async () => {
 
     const error = screen.queryByTestId(`city-error`);
     expect(error).toBeNull();
+  });
+});
 
+test("user input valid zipcode", async () => {
+  const zipcode = screen.getByTestId(`zipcode-input`) as HTMLInputElement;
+  userEvent.clear(zipcode);
+  await userEvent.type(zipcode, userDataMock.zipcode);
+  userEvent.tab();
+
+  await waitFor(async () => {
+    expect(zipcode.value).toEqual(userDataMock.zipcode);
+
+    const next = screen.getByTestId(`finish-button`);
+    await next.click();
+  });
+});
+
+test("user input valid username", async () => {
+  const username = screen.getByTestId(`username-input`) as HTMLInputElement;
+  userEvent.clear(username);
+  await userEvent.type(username, userDataMock.username);
+  userEvent.tab();
+
+  const password = screen.getByTestId(`password-input`) as HTMLInputElement;
+  userEvent.clear(password);
+  await userEvent.type(password, userDataMock.password);
+  userEvent.tab();
+
+  const confirmPassword = screen.getByTestId(
+    `confirmPassword-input`
+  ) as HTMLInputElement;
+  userEvent.clear(confirmPassword);
+  await userEvent.type(confirmPassword, userDataMock.password);
+  userEvent.tab();
+
+  await waitFor(async () => {
     const next = screen.getByTestId(`finish-button`);
     await next.click();
   });
