@@ -1,9 +1,11 @@
+import { useContext } from "react";
+import UserDataContext from "../context/UserDataContext";
+
 export const useAuth = () => {
-  const auth = JSON.parse(localStorage.getItem("userlogged") as string);
-  console.log(auth);
+  const [userData] = useContext(UserDataContext);
   const isAuth = () => {
-    if (!auth) return false;
-    if (auth?.fullname !== "") {
+    if (!userData) return false;
+    if (userData?.fullname !== "") {
       return true;
     }
     return false;

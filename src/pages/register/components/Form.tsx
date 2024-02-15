@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Field, Form, Formik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import UserDataContext from "../../../context/UserDataContext";
 import { useNavigate } from "react-router-dom";
@@ -63,97 +63,70 @@ function FormRegister({
         .required(t(`form.validation.confirmPassword.required`)),
     }),
   ];
+  const formik = useFormik({
+    initialValues: {
+      fullname: userData?.fullname || "",
+      email: userData?.email || "",
+      dob: userData?.dob || "",
+      address: userData?.address || "",
+      zipcode: userData?.zipcode || "",
+      city: userData?.city || "",
+      province: userData?.province || "",
+      username: userData?.username || "",
+      password: "",
+      confirmPassword: "",
+      wishlist: [],
+    },
+    validationSchema: validationSchemas[step],
+
+    onSubmit: (values) => {
+      if (step !== 2) return next();
+      values.password = bcrypt.hashSync(values.password, 10);
+      values.confirmPassword = bcrypt.hashSync(values.confirmPassword, 10);
+      setUserData(values);
+
+      const userdb = JSON.parse(localStorage.getItem("userdb") as string);
+      userdb?.push(values);
+      localStorage.setItem("userdb", JSON.stringify(userdb));
+      localStorage.setItem("userlogged", JSON.stringify(values));
+      navigate("/user");
+    },
+  });
 
   return (
     <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
       <div className="step-form">
         <h1 className="form-title ">{stepList[step]["title"]}</h1>
         <h3 className="form-desc mb-10">{stepList[step]["desc"]}</h3>
-        <Formik
-          initialValues={{
-            fullname: userData?.fullname || "",
-            email: userData?.email || "",
-            dob: userData?.dob || "",
-            address: userData?.address || "",
-            zipcode: userData?.zipcode || "",
-            city: userData?.city || "",
-            province: userData?.province || "",
-            username: userData?.username || "",
-            password: "",
-            confirmPassword: "",
-            wishlist: [],
-          }}
-          validationSchema={validationSchemas[step]}
-          validateOnMount={false}
-          onSubmit={(values) => {
-            console.log(values);
-            if (step !== 2) return next();
-            values.password = bcrypt.hashSync(values.password, 10);
-            values.confirmPassword = bcrypt.hashSync(
-              values.confirmPassword,
-              10
-            );
-            setUserData(values);
 
-            const userdb = JSON.parse(localStorage.getItem("userdb") as string);
-            userdb?.push(values);
-            localStorage.setItem("userdb", JSON.stringify(userdb));
-            localStorage.setItem("userlogged", JSON.stringify(values));
-            navigate("/user");
-          }}
-        >
-          {({ handleSubmit, values, errors, touched }) => (
-            <Form onSubmit={handleSubmit}>
-              {
-                [
-                  <PersonalInfo
-                    Field={Field}
-                    values={values}
-                    errors={errors}
-                    touched={touched}
-                    ErrorMessage={ErrorMessage}
-                    t={t}
-                  />,
-                  <AddressInfo
-                    Field={Field}
-                    errors={errors}
-                    values={values}
-                    touched={touched}
-                    ErrorMessage={ErrorMessage}
-                    t={t}
-                  />,
-                  <AccountData
-                    Field={Field}
-                    errors={errors}
-                    values={values}
-                    touched={touched}
-                    ErrorMessage={ErrorMessage}
-                    t={t}
-                  />,
-                ][step]
-              }
-              <div className="button-form-group ">
-                <button
-                  className="back-button"
-                  onClick={prev}
-                  type="button"
-                  tabIndex={-1}
-                  disabled={isFirstStep}
-                  data-testid="back-button"
-                >
-                  {t("back")}
-                </button>
-                <button
-                  className="next-button"
-                  type="submit"
-                  data-testid="finish-button"
-                >
-                  {isLastStep ? t("finnish") : t("next")}
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          {
+            [
+              <PersonalInfo formik={formik} t={t} />,
+              <AddressInfo formik={formik} t={t} />,
+              <AccountData formik={formik} t={t} />,
+            ][step]
+          }
+          <div className="button-form-group ">
+            <button
+              className="back-button"
+              onClick={prev}
+              type="button"
+              tabIndex={-1}
+              disabled={isFirstStep}
+              data-testid="back-button"
+            >
+              {t("back")}
+            </button>
+            <button
+              className="next-button"
+              type="submit"
+              data-testid="finish-button"
+            >
+              {isLastStep ? t("finnish") : t("next")}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -1,21 +1,47 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import avatar from "../../assets/avatar.svg";
 import UserDataContext from "../../context/UserDataContext";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ListOfProvinsi, rupiah } from "../../utils";
+import { ListOfProvinsi, RegsiterDataType, rupiah } from "../../utils";
 import WishForm from "./components/WishForm";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Welcome() {
   // const navigate = useNavigate();
   const { t } = useTranslation();
   const [addData, setAddData] = useState(false);
-  const [userData] = useContext(UserDataContext);
-  useEffect(() => {}, [userData]);
+  const [userData, setUserData] = useContext(UserDataContext);
+  const userdb = JSON.parse(localStorage.getItem("userdb") as string);
+  const { isAuth } = useAuth();
+  if (!isAuth()) {
+    return <Navigate to="/" />;
+  }
+  useEffect(() => {
+    const updatedDb = userdb.map((user: RegsiterDataType) =>
+      user.username === userData?.username
+        ? { ...user, wishlist: userData?.wishlist }
+        : user
+    );
+    localStorage.setItem("userlogged", JSON.stringify(userData));
+    localStorage.setItem("userdb", JSON.stringify(updatedDb));
+  }, [userData]);
+
   const removeData = () => {
     localStorage.removeItem("userlogged");
 
     window.location.href = "/";
+  };
+
+  const removeItem = (id: number) => {
+    const newUserData = userData?.wishlist.filter(function (data) {
+      return data.id !== id;
+    });
+
+    setUserData((prev) => ({
+      ...prev,
+      wishlist: newUserData,
+    }));
   };
   const provinsi = ListOfProvinsi.find(
     (prov) => prov.value === userData?.province
@@ -113,18 +139,25 @@ export default function Welcome() {
                   Estimated price
                 </th>
                 <th className="p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl">
-                  Status
+                  Action
                 </th>
               </tr>
               {userData.wishlist?.map((data, i) => (
                 <tr>
                   <td className="p-4 font-bold text-center ">{i + 1}</td>
                   <td className="p-4 font-bold">{data.name}</td>
-                  <td className="p-4 text-sky-400 font-semibold">
+                  <td className="p-4 text-green-400 text-center font-semibold">
                     <a href={data.url}>url</a>
                   </td>
                   <td className="p-4 font-bold">{rupiah(data.price)}</td>
-                  <td className="p-4 text-center  font-bold">{data.status}</td>
+                  <td className="p-4 text-center font-bold">
+                    <button
+                      className="px-4 py-2 rounded-xl border-2 border-black border-b-4 hover:bg-red-500 hover:text-white hover:scale-[1.1] transition ease-in-out"
+                      onClick={() => removeItem(data.id)}
+                    >
+                      remove
+                    </button>
+                  </td>
                 </tr>
               ))}
               {userData.wishlist.length === 0 && <p>no data yet</p>}

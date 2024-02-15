@@ -1,21 +1,13 @@
-import { FieldProps, FormikErrors, FormikTouched } from "formik";
+import { FormikProps } from "formik";
 import { TFunction } from "i18next";
 
 export const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
-
-export enum WishStatus {
-  Pending,
-  Bought,
-  Cancelled,
-  MAHAL,
-}
 
 export interface WishItemType {
   id: number;
   name: string;
   url: string;
   price: number;
-  status: WishStatus;
 }
 
 export interface StepListType {
@@ -43,6 +35,18 @@ export interface RegsiterDataType {
   province: string;
   username: string | null;
   password: string | null;
+  wishlist: WishItemType[];
+}
+export interface UserDataType {
+  fullname: string;
+  email: string;
+  dob: string;
+  address: string;
+  zipcode: string;
+  city: string;
+  province: string;
+  username: string;
+  password: string;
   wishlist: WishItemType[];
 }
 export const rupiah = (balance: number) => {
@@ -76,18 +80,27 @@ export interface FormikDataInterface {
   username: string;
   password: string;
   confirmPassword: string;
+  wishlist: WishItemType[];
 }
 
 export interface RegsiterDataTypeObject {
   registerData: RegsiterDataContextType;
 }
 
-export interface FormStepProps<Values> {
-  Field: string | React.ComponentType<FieldProps["field"]>;
-  values: Values;
-  touched: FormikTouched<Values>;
-  errors: FormikErrors<Values>;
-  ErrorMessage: string | React.ComponentType<FieldProps>;
+export interface FormStepProps {
+  formik: FormikProps<{
+    fullname: string;
+    email: string;
+    dob: string;
+    address: string;
+    zipcode: string;
+    city: string;
+    province: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
+    wishlist: never[];
+  }>;
   t: TFunction;
 }
 

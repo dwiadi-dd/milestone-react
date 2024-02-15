@@ -1,84 +1,111 @@
-import { ErrorMessage } from "formik";
 import { FormStepProps, ListOfCity, ListOfProvinsi } from "../../../../utils";
 
-const AddressInfo = ({ Field, errors, touched, values, t }: FormStepProps) => {
+const AddressInfo = ({ formik, t }: FormStepProps) => {
   return (
     <div>
       <div className="form-group ">
         <label htmlFor="address" className="label-input">
           {t(`form.address`)}
         </label>
-        <Field
+        <input
           className="input-form"
           type="text"
           id="address"
           name="address"
+          value={formik.values.address}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           data-testid="address-input"
         />
-        <ErrorMessage name="address" component="div" className="text-red-600" />
+        {formik.touched.address && formik.errors.address ? (
+          <div className="font-light text-red-600">{formik.errors.address}</div>
+        ) : (
+          <div>{"\u00A0"}</div>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="province" className="label-input">
           {t(`form.province`)}
         </label>
-        <Field
-          as="select"
+        <select
           className="input-form"
           id="province"
           name="province"
           data-testid="province-select"
-        >
-          <option value="" disabled selected>
-            {t(`form.provincePlaceholder`)}
-          </option>
-          {ListOfProvinsi.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.provinsi}
-            </option>
-          ))}
-        </Field>
-        <ErrorMessage
-          name="province"
-          component="div"
-          className="text-red-600"
+          value={formik.values.province}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          children={
+            <>
+              <option value="" disabled selected>
+                {t(`form.provincePlaceholder`)}
+              </option>
+              {ListOfProvinsi.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.provinsi}
+                </option>
+              ))}
+            </>
+          }
         />
+        {formik.touched.province && formik.errors.province ? (
+          <div className="font-light text-red-600">
+            {formik.errors.province}
+          </div>
+        ) : (
+          <div>{"\u00A0"}</div>
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="city" className="label-input">
           {t(`form.city`)}
         </label>
-        <Field
-          as="select"
+        <select
           className="input-form"
           id="city"
           name="city"
           data-testid="city-select"
-        >
-          <option value="" disabled selected>
-            {t(`form.cityPlaceholder`)}
-          </option>
-          {ListOfCity[values.province]?.map((option) => (
-            <option key={option.kota} value={option.kota}>
-              {option.kota}
-            </option>
-          ))}
-        </Field>
-        <p className="text-red-400">{"\u00A0"}</p>
-        <ErrorMessage name="city" component="div" className="text-red-600" />
+          value={formik.values.city}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          children={
+            <>
+              <option value="" disabled selected>
+                {t(`form.cityPlaceholder`)}
+              </option>
+              {ListOfCity[formik.values.province]?.map((option) => (
+                <option key={option.kota} value={option.kota}>
+                  {option.kota}
+                </option>
+              ))}
+            </>
+          }
+        />
+        {formik.touched.city && formik.errors.city ? (
+          <div className="font-light text-red-600">{formik.errors.city}</div>
+        ) : (
+          <div>{"\u00A0"}</div>
+        )}
       </div>
       <div className="form-group ">
         <label htmlFor="zipcode" className="label-input">
           {t(`form.zipcode`)}
         </label>
-        <Field
+        <input
           className="input-form"
           type="text"
           id="zipcode"
           name="zipcode"
           data-testid="zipcode-input"
-          error={touched.zipcode && errors.zipcode}
+          value={formik.values.zipcode}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
-        <ErrorMessage name="zipcode" component="div" className="text-red-600" />
+        {formik.touched.zipcode && formik.errors.zipcode ? (
+          <div className="font-light text-red-600">{formik.errors.zipcode}</div>
+        ) : (
+          <div>{"\u00A0"}</div>
+        )}
       </div>
     </div>
   );

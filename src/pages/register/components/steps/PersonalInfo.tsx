@@ -1,28 +1,30 @@
-import { ErrorMessage } from "formik";
 import { FormStepProps } from "../../../../utils";
 
-const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
+const PersonalInfo = ({ formik, t }: FormStepProps) => {
   return (
     <div>
       <div className="form-group ">
         <label htmlFor="fullname" className="label-input">
           {t(`form.fullname`)}
         </label>
-        <Field
+        <input
           autoFocus
           className="input-form"
           type="text"
           id="fullname"
           name="fullname"
+          value={formik.values.fullname}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           data-testid="fullname-input"
         />
-        {touched.fullname && errors.fullname ? (
+        {formik.touched.fullname && formik.errors.fullname ? (
           <div
             className="font-light text-red-600"
             data-testid="error-test"
             role="alert"
           >
-            {errors.fullname}
+            {formik.errors.fullname}
           </div>
         ) : (
           <div>{"\u00A0"}</div>
@@ -32,36 +34,42 @@ const PersonalInfo = ({ Field, errors, touched, t }: FormStepProps) => {
         <label htmlFor="email" className="label-input">
           {t(`form.email`)}
         </label>
-        <Field
+        <input
           className="input-form"
           type="email"
           id="email"
           name="email"
           data-testid="email-input"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
-        {touched.email && errors.email ? (
-          <div className="font-light text-red-600">{errors.email}</div>
+        {formik.touched.email && formik.errors.email ? (
+          <div className="font-light text-red-600">{formik.errors.email}</div>
         ) : (
           <div>{"\u00A0"}</div>
-        )}{" "}
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="dob" className="label-input">
           {t(`form.dob`)}
         </label>
-        <Field
+        <input
           className="input-form"
           type="date"
           id="dob"
           name="dob"
           max="2006-01-01"
           data-testid="dob-input"
+          value={formik.values.dob}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
-        {touched.dob && errors.dob ? (
-          <div className="font-light text-red-600">{errors.dob}</div>
+        {formik.touched.dob && formik.errors.dob ? (
+          <div className="font-light text-red-600">{formik.errors.dob}</div>
         ) : (
           <div>{"\u00A0"}</div>
-        )}{" "}
+        )}
       </div>
     </div>
   );

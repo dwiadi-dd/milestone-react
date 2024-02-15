@@ -5,16 +5,18 @@ import bcrypt from "bcryptjs";
 import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage: React.FC = () => {
+  const userdb = JSON.parse(localStorage.getItem("userdb") as string);
   const [, setUserData] = useContext(UserDataContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const userdb = JSON.parse(localStorage.getItem("userdb"));
   const { isAuth } = useAuth();
   if (isAuth()) {
     return <Navigate to="/user" />;
   }
-  const handleLogin = (data) => {
-    const target = userdb?.find((user) => user.email === data.email);
+  const handleLogin = (data: { email: string; password: string }) => {
+    const target = userdb?.find(
+      (user: { email: string; password: string }) => user.email === data.email
+    );
     if (target) {
       if (bcrypt.compareSync(data.password, target.password)) {
         setUserData(target);
@@ -27,9 +29,6 @@ const LoginPage: React.FC = () => {
     } else {
       setError("invalid credentials");
     }
-    console.log(data);
-    console.log(target);
-    // navigate("/user");
   };
   return (
     <div className="flex items-center justify-center h-[90vh] bg-stone-100">
@@ -40,10 +39,10 @@ const LoginPage: React.FC = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
+            const formData = new FormData(e.target as HTMLFormElement);
             const obj = {
-              email: formData.get("email") ?? "",
-              password: formData.get("password") ?? "",
+              email: formData.get("email")?.toString() ?? "",
+              password: formData.get("password")?.toString() ?? "",
             };
             console.log(obj);
             handleLogin(obj);
@@ -71,15 +70,15 @@ const LoginPage: React.FC = () => {
               className="input-form w-full"
             />
           </div>
-          <div className="flex justify-evenly">
+          <div className="flex justify-evenly flex-row-reverse">
+            <button type="submit" className="next-button float-right">
+              Sign In
+            </button>
             <button
               className="back-button"
               onClick={() => navigate("/register")}
             >
               register
-            </button>
-            <button type="submit" className="next-button float-right">
-              Sign In
             </button>
           </div>
         </form>
