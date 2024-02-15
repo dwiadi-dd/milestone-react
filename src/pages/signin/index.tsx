@@ -13,6 +13,7 @@ const LoginPage: React.FC = () => {
   if (isAuth()) {
     return <Navigate to="/user" />;
   }
+  console.log(isAuth());
   const handleLogin = (data: { email: string; password: string }) => {
     const target = userdb?.find(
       (user: { email: string; password: string }) => user.email === data.email

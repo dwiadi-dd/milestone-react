@@ -40,6 +40,7 @@ const Main = () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/user" element={<UserPage />} />
               </Route>
+              <Route path="*" element={<Home />} />
             </Routes>
           </div>
         </UserDataContext.Provider>

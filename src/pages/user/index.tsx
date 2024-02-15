@@ -67,7 +67,7 @@ const Welcome: React.FC = () => {
               <tr>
                 <td className="p-4 font-bold text-center ">{i + 1}</td>
                 <td className="p-4 font-bold">{data.name}</td>
-                <td className="p-4 text-green-400 text-center font-semibold">
+                <td className="p-4  text-center font-extrabold font-theme hover:scale-[1.1]">
                   <a href={data.url}>url</a>
                 </td>
                 <td className="p-4 font-bold">{rupiah(data.price)}</td>
@@ -81,7 +81,13 @@ const Welcome: React.FC = () => {
                 </td>
               </tr>
             ))}
-            {userData.wishlist.length === 0 && <p>{t("no-data")}</p>}
+            {userData.wishlist.length === 0 && (
+              <tr>
+                <td className="p-8 font-extrabold text-center" colSpan={5}>
+                  {t("no-data")}
+                </td>
+              </tr>
+            )}
           </table>
         </div>
       </div>
