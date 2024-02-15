@@ -18,7 +18,9 @@ const AddressInfo = ({ formik, t }: FormStepProps) => {
           data-testid="address-input"
         />
         {formik.touched.address && formik.errors.address ? (
-          <div className="font-light text-red-600">{formik.errors.address}</div>
+          <div className="font-light text-red-600" data-testid="address-error">
+            {formik.errors.address}
+          </div>
         ) : (
           <div>{"\u00A0"}</div>
         )}
@@ -49,7 +51,7 @@ const AddressInfo = ({ formik, t }: FormStepProps) => {
           }
         />
         {formik.touched.province && formik.errors.province ? (
-          <div className="font-light text-red-600">
+          <div className="font-light text-red-600" data-testid="province-error">
             {formik.errors.province}
           </div>
         ) : (
@@ -82,7 +84,9 @@ const AddressInfo = ({ formik, t }: FormStepProps) => {
           }
         />
         {formik.touched.city && formik.errors.city ? (
-          <div className="font-light text-red-600">{formik.errors.city}</div>
+          <div className="font-light text-red-600" data-testid="city-error">
+            {formik.errors.city}
+          </div>
         ) : (
           <div>{"\u00A0"}</div>
         )}
@@ -102,7 +106,9 @@ const AddressInfo = ({ formik, t }: FormStepProps) => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.zipcode && formik.errors.zipcode ? (
-          <div className="font-light text-red-600">{formik.errors.zipcode}</div>
+          <div className="font-light text-red-600" data-testid="zipcode-error">
+            {formik.errors.zipcode}
+          </div>
         ) : (
           <div>{"\u00A0"}</div>
         )}
