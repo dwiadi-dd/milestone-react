@@ -17,6 +17,7 @@ const userData = {
   province: "",
   zipcode: "",
   password: "",
+  wishlist: [],
 };
 
 const userDataMock = {
@@ -29,6 +30,7 @@ const userDataMock = {
   province: "Test Province",
   zipcode: "12345",
   password: "12345",
+  wishlist: [],
 };
 
 render(

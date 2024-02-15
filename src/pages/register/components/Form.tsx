@@ -94,7 +94,7 @@ function FormRegister({
   });
 
   return (
-    <div className="regis-container flex flex-col lg:pt-32 pt-12 w-full">
+    <div className="regis-container ">
       <div className="step-form">
         <h1 className="form-title ">{stepList[step]["title"]}</h1>
         <h3 className="form-desc mb-10">{stepList[step]["desc"]}</h3>

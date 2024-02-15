@@ -31,11 +31,9 @@ const LoginPage: React.FC = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center h-[90vh] bg-stone-100">
-      <div className="w-1/4 p-6 py-10 bg-white rounded-xl">
-        <h2 className="text-4xl font-theme mb-6 text-center font-bold text-green-500">
-          digiWish
-        </h2>
+    <div className="login-page">
+      <div className=" login-card">
+        <h2 className="login-title">digiWish</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();

@@ -51,4 +51,52 @@
   .label-input {
     @apply text-xl capitalize text-slate-500 tracking-wide;
   }
+  .table-th {
+    @apply p-4 border-2 bg-slate-200   border-r-4 border-b-8 border-black rounded-xl;
+  }
+  .add-button {
+    @apply text-green-500  lg:float-end font-semibold transition ease-in-out  hover:scale-[1.1] hover:text-green-400  font-theme  mb-10;
+  }
+  .remove-button {
+    @apply px-4 py-2 rounded-xl border-2 border-black border-b-4 hover:bg-red-500 hover:text-white hover:scale-[1.1] transition ease-in-out;
+  }
+  .dashboard-section {
+    @apply bg-white p-8 rounded-2xl shadow-xl overflow-y-hidden lg:overflow-scroll min-h-[50vh]  lg:h-[75vh] lg:w-3/4  w-full border-2 border-black border-b-[14px] border-r-4;
+  }
+  .user-page {
+    @apply flex flex-col gap-4 min-h-[93vh] bg-green-100  px-4 md:px-10 lg:px-20;
+  }
+  .main-user-page {
+    @apply flex flex-col lg:flex-row gap-4 mt-8;
+  }
+  .profile-section {
+    @apply bg-white rounded-2xl p-8 w-full lg:w-1/4 border-2 border-black border-b-[14px] border-r-4;
+  }
+  .greeting-title {
+    @apply text-center text-2xl font-semibold tracking-widest font-theme;
+  }
+  .avatar-img {
+    @apply w-[200px] rounded-full mx-auto my-8;
+  }
+  .bio-section {
+    @apply flex flex-col justify-center mx-auto gap-4;
+  }
+  .bio-title {
+    @apply capitalize text-xl font-light;
+  }
+  .login-page {
+    @apply flex items-center justify-center h-[90vh] bg-stone-100;
+  }
+  .login-card {
+    @apply w-[350px] lg:w-1/4 p-6 py-10 bg-white rounded-xl;
+  }
+  .login-title {
+    @apply text-4xl font-theme mb-6 text-center font-bold text-green-500;
+  }
+  .regis-container {
+    @apply flex flex-col lg:pt-32 pt-12 w-full;
+  }
+  .home-page {
+    @apply flex flex-col items-center justify-center h-[90vh] bg-stone-100;
+  }
 }

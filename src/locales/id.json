@@ -62,7 +62,7 @@
   "user.email": "Alamat Email",
   "user.address": "Alamat",
   "user.back": "Kembali",
-  "user.clear": "Logout",
+  "user.clear": "Keluar",
   "back": "Kembali",
   "edit": "ubah data",
   "next": "Lanjut",
@@ -70,5 +70,15 @@
 
   "hero-text": "selamat datang, selamat bermimpi!",
   "hero-greet": "ngewish aja dulu..",
-  "hero-link": "daftar disini"
+  "hero-link": "daftar disini",
+
+  "add-wish": "Tambah Wish",
+  "close-wish": "tutup",
+  "th.no": "No",
+  "th.item": "nama barang",
+  "th.url": "url",
+  "th.price": "perkiraan harga",
+  "th.action": "aksi",
+  "remove": "hapus",
+  "no-data": "belum ada data"
 }

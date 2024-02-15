@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import UserDataContext from "../context/UserDataContext";
-import User from "../pages/user/index";
+import ProfileSection from "../pages/user/components/ProfileSection";
 import i18next from "../locales/locales";
 import { expect, test } from "vitest";
 import { BrowserRouter } from "react-router-dom";
@@ -13,16 +13,17 @@ const userData = {
   dob: "2000-01-01",
   address: "123 Test St",
   city: "Test City",
-  province: "Test Province",
+  province: "jabar",
   zipcode: "12345",
   password: "12345",
+  wishlist: [],
 };
 
 render(
   <BrowserRouter>
     <I18nextProvider i18n={i18next}>
       <UserDataContext.Provider value={[userData, () => {}]}>
-        <User />
+        <ProfileSection userData={userData} />
       </UserDataContext.Provider>
     </I18nextProvider>
   </BrowserRouter>
@@ -30,7 +31,7 @@ render(
 
 test("renders welcome message when user data is present", () => {
   const greeting = screen.getByTestId(`greeting-user`);
-  expect(greeting.textContent).toEqual(`Welcome ${userData.username}!`);
+  expect(greeting.textContent).toEqual(`Hello,  ${userData.fullname}!`);
 });
 
 test("renders email when user data is present", () => {
@@ -46,7 +47,7 @@ test("renders dob when user data is present", () => {
 test("renders address when user data is present", () => {
   const address = screen.getByTestId(`test-address`);
   expect(address.textContent).toEqual(
-    `${userData.address}, ${userData.city}, ${userData.province}, ${userData.zipcode}. ${userData.password}`
+    `${userData.address}, ${userData.city}, Jawa Barat, ${userData.zipcode}.`
   );
 });
 

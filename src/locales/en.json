@@ -71,5 +71,15 @@
 
   "hero-text": "Welcome to the digiWish",
   "hero-greet": "write your wish, be calm and let god do the rest..",
-  "hero-link": "register here"
+  "hero-link": "register here",
+
+  "add-wish": "Add Wish",
+  "close-wish": "close",
+  "th.no": "No",
+  "th.item": "item name",
+  "th.url": "url",
+  "th.price": "estimated price",
+  "th.action": "action",
+  "remove": "remove",
+  "no-data": "no data available"
 }

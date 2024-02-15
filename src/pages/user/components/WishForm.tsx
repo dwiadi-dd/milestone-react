@@ -3,11 +3,13 @@ import { useContext, useEffect } from "react";
 import * as Yup from "yup";
 import UserDataContext from "../../../context/UserDataContext";
 import { RegsiterDataType } from "../../../utils";
+import { useTranslation } from "react-i18next";
 
 const WishForm = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useContext<any>(UserDataContext);
   const userdb = JSON.parse(localStorage.getItem("userdb") as string);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const updatedDb = userdb.map((user: RegsiterDataType) =>
@@ -27,7 +29,7 @@ const WishForm = () => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Item Name is required"),
-    url: Yup.string().url("Invalid URL").required("Item URL is required"),
+    url: Yup.string().url("Invalid URL").required("URL is required"),
     price: Yup.number().required("Estimated Price is required"),
   });
 
@@ -52,10 +54,10 @@ const WishForm = () => {
       {({ handleSubmit, values }) => (
         <Form onSubmit={handleSubmit} className="mt-20 w-2/3 mb-20 mx-auto ">
           <h1 className="font-theme text-2xl font-semibold mb-4">
-            Add Wishlist
+            {t("add-wish")}
           </h1>
           <div className="form-group ">
-            <label htmlFor="name">Item Name</label>
+            <label htmlFor="name">{t("th.item")}</label>
             <Field
               type="text"
               name="name"
@@ -70,7 +72,7 @@ const WishForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="url">Item URL</label>
+            <label htmlFor="url">{t("th.url")}</label>
             <Field
               type="text"
               name="url"
@@ -80,7 +82,7 @@ const WishForm = () => {
             <ErrorMessage name="url" component="div" className="text-red-500" />
           </div>
           <div className="form-group">
-            <label htmlFor="price">Estimated Price</label>
+            <label htmlFor="price">{t("th.price")}</label>
             <Field
               type="text"
               name="price"
