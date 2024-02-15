@@ -1,4 +1,4 @@
-import { FormStepProps } from "../../../../utils";
+import { FormStepProps, priorDate } from "../../../../utils";
 
 const PersonalInfo = ({ formik, t }: FormStepProps) => {
   return (
@@ -21,7 +21,7 @@ const PersonalInfo = ({ formik, t }: FormStepProps) => {
         {formik.touched.fullname && formik.errors.fullname ? (
           <div
             className="font-light text-red-600"
-            data-testid="error-test"
+            data-testid="error-fullname"
             role="alert"
           >
             {formik.errors.fullname}
@@ -45,7 +45,13 @@ const PersonalInfo = ({ formik, t }: FormStepProps) => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div className="font-light text-red-600">{formik.errors.email}</div>
+          <div
+            className="font-light text-red-600"
+            role="alert"
+            data-testid="error-email"
+          >
+            {formik.errors.email}
+          </div>
         ) : (
           <div>{"\u00A0"}</div>
         )}
@@ -59,14 +65,20 @@ const PersonalInfo = ({ formik, t }: FormStepProps) => {
           type="date"
           id="dob"
           name="dob"
-          max="2006-01-01"
+          max={priorDate.toISOString().split("T")[0]}
           data-testid="dob-input"
           value={formik.values.dob}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.dob && formik.errors.dob ? (
-          <div className="font-light text-red-600">{formik.errors.dob}</div>
+          <div
+            className="font-light text-red-600"
+            role="alert"
+            data-testid="error-dob"
+          >
+            {formik.errors.dob}
+          </div>
         ) : (
           <div>{"\u00A0"}</div>
         )}

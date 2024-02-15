@@ -35,6 +35,8 @@
   "form.validation.password.max": "Kata sandi maksimal 18 karakter",
   "form.validation.confirmPassword.required": "Konfirmasi kata sandi harus diisi",
   "form.validation.confirmPassword.oneOf": "Kata sandi tidak sesuai",
+  "form.validation.dob.max": "usia minimal 18 tahun",
+
   "stepList": [
     {
       "id": 1,

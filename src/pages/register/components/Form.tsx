@@ -8,7 +8,7 @@ import PersonalInfo from "./steps/PersonalInfo";
 import AddressInfo from "./steps/AddressInfo";
 import AccountData from "./steps/AccountData";
 import bcrypt from "bcryptjs";
-import { passwordRules } from "../../../utils";
+import { passwordRules, priorDate } from "../../../utils";
 
 function FormRegister({
   step,
@@ -34,7 +34,12 @@ function FormRegister({
       email: Yup.string()
         .email(t(`form.validation.email.email`))
         .required(t(`form.validation.email.required`)),
-      dob: Yup.date().required(t(`form.validation.dob.required`)),
+      dob: Yup.date()
+        .required(t(`form.validation.dob.required`))
+        .max(
+          priorDate.toISOString().split("T")[0],
+          t(`form.validation.dob.max`)
+        ),
     }),
     Yup.object({
       address: Yup.string().required(t(`form.validation.address.required`)),

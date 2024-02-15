@@ -111,6 +111,11 @@ interface City {
 interface CityList {
   [region: string]: City[];
 }
+const today = new Date();
+
+export const priorDate = new Date(
+  new Date().setFullYear(today.getFullYear() - 18)
+);
 
 export const stepList = [
   {

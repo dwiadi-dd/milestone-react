@@ -35,6 +35,7 @@
   "form.validation.password.max": "Password maximum length is 18 characters",
   "form.validation.confirmPassword.required": "Confirm password is required",
   "form.validation.confirmPassword.oneOf": "Password does not match",
+  "form.validation.dob.max": "Date of birth must be at least 18 years old",
   "stepList": [
     {
       "id": 1,
