@@ -54,6 +54,7 @@ const LoginPage: React.FC = () => {
               type="email"
               id="email"
               name="email"
+              data-testid="email-test"
               className="input-form w-full"
             />
           </div>
@@ -65,11 +66,16 @@ const LoginPage: React.FC = () => {
               type="password"
               id="password"
               name="password"
+              data-testid="password-test"
               className="input-form w-full"
             />
           </div>
           <div className="flex justify-evenly flex-row-reverse">
-            <button type="submit" className="next-button float-right">
+            <button
+              type="submit"
+              className="next-button float-right"
+              data-testid="login-test"
+            >
               Sign In
             </button>
             <button

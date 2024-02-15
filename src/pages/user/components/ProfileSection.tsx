@@ -53,6 +53,7 @@ const ProfileSection = ({ userData }: { userData: RegsiterDataType }) => {
           <button
             className="next-button text-ellipsis bg-red-600 hover:bg-red-900"
             type="button"
+            data-testid="logout-button"
             onClick={removeData}
           >
             {t("user.clear")}
