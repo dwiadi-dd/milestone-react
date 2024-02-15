@@ -3,20 +3,22 @@ import avatar from "../../assets/avatar.svg";
 import UserDataContext from "../../context/UserDataContext";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ListOfProvinsi, RegsiterDataType, rupiah } from "../../utils";
+import {
+  ListOfProvinsi,
+  RegsiterDataType,
+  WishItemType,
+  rupiah,
+} from "../../utils";
 import WishForm from "./components/WishForm";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function Welcome() {
-  // const navigate = useNavigate();
   const { t } = useTranslation();
   const [addData, setAddData] = useState(false);
-  const [userData, setUserData] = useContext(UserDataContext);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [userData, setUserData] = useContext<any>(UserDataContext);
   const userdb = JSON.parse(localStorage.getItem("userdb") as string);
-  const { isAuth } = useAuth();
-  if (!isAuth()) {
-    return <Navigate to="/" />;
-  }
+
   useEffect(() => {
     const updatedDb = userdb.map((user: RegsiterDataType) =>
       user.username === userData?.username
@@ -27,6 +29,11 @@ export default function Welcome() {
     localStorage.setItem("userdb", JSON.stringify(updatedDb));
   }, [userData]);
 
+  const { isAuth } = useAuth();
+  if (!isAuth()) {
+    return <Navigate to="/" />;
+  }
+
   const removeData = () => {
     localStorage.removeItem("userlogged");
 
@@ -34,11 +41,13 @@ export default function Welcome() {
   };
 
   const removeItem = (id: number) => {
-    const newUserData = userData?.wishlist.filter(function (data) {
+    const newUserData = userData?.wishlist.filter(function (
+      data: WishItemType
+    ) {
       return data.id !== id;
     });
-
-    setUserData((prev) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setUserData((prev: any) => ({
       ...prev,
       wishlist: newUserData,
     }));
@@ -46,6 +55,7 @@ export default function Welcome() {
   const provinsi = ListOfProvinsi.find(
     (prov) => prov.value === userData?.province
   );
+
   return (
     <div className=" flex flex-col gap-4  h-screen  bg-stone-100 px-20 ">
       {userData ? (
@@ -142,7 +152,7 @@ export default function Welcome() {
                   Action
                 </th>
               </tr>
-              {userData.wishlist?.map((data, i) => (
+              {userData.wishlist?.map((data: WishItemType, i: number) => (
                 <tr>
                   <td className="p-4 font-bold text-center ">{i + 1}</td>
                   <td className="p-4 font-bold">{data.name}</td>
